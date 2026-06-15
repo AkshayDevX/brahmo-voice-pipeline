@@ -40,6 +40,6 @@ const existingUser = await db.select().from(user).where(eq(user.id, userId)).lim
 ## 2. Default ID Strategy
 The schema heavily relies on:
 ```typescript
-id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID())
+id: integer().primaryKey().generatedAlwaysAsIdentity()
 ```
-When inserting new records via `db.insert(table).values({...})`, **never manually generate the `id` field** unless specifically requested. Drizzle will securely handle the string/UUID generation natively using the `$defaultFn()` fallback.
+When inserting new records via `db.insert(table).values({...})`, **never manually generate the `id` field** unless specifically requested. Drizzle / Postgres will securely handle the generation natively.
