@@ -44,7 +44,7 @@ export async function transcribeWithWhisper(
 }
 
 /**
- * Transcribes audio using Deepgram's Nova-2 medical model (or general multilingual)
+ * Transcribes audio using Deepgram's Nova-3 medical model (or general multilingual)
  */
 export async function transcribeWithDeepgram(
   audioBuffer: Buffer,

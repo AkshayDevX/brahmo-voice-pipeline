@@ -265,6 +265,14 @@ function checkNegationPreservation(
     "cannot",
     "should not",
     "shouldn't",
+    "does not",
+    "doesn't",
+    "doesnt",
+    "no response",
+    "not respond",
+    "without",
+    "if no",
+    "if not",
     "stop",
     "avoid",
     "discontinue",
@@ -303,9 +311,9 @@ function assessDangerLevel(
   ourNegationPreserved: boolean,
   chatgptNegationPreserved: boolean,
 ): {
-  level: "SAFE" | "MODERATE" | "CRITICAL";
+  ourDangerLevel: "SAFE" | "MODERATE" | "CRITICAL";
   isGenericDangerous: boolean;
-  isNegationCritical: boolean;
+  hasNegation: boolean;
 } {
   // Check if this note has negation-critical content
   const hasNegation = note.why_fails.some((f) => {
@@ -323,24 +331,27 @@ function assessDangerLevel(
     );
   });
 
+  // 1. Calculate danger level of OUR pipeline
+  let ourDangerLevel: "SAFE" | "MODERATE" | "CRITICAL" = "SAFE";
+  if ((hasNegation && !ourNegationPreserved) || ourAccuracy < 0.3) {
+    ourDangerLevel = "CRITICAL";
+  } else if (ourAccuracy < 0.7) {
+    ourDangerLevel = "MODERATE";
+  }
+
+  // 2. Calculate if Generic AI (ChatGPT) is dangerous
+  const chatgptNegationCritical = hasNegation && !chatgptNegationPreserved;
   const delta = ourAccuracy - chatgptAccuracy;
-
-  // Generic AI is dangerous if:
-  // 1. It misses negations that our pipeline catches
-  // 2. Our pipeline significantly outperforms it (>15% delta)
-  // 3. It produces wrong/dangerous interpretations
-  const isNegationCritical =
-    hasNegation && ourNegationPreserved && !chatgptNegationPreserved;
   const isGenericDangerous =
-    isNegationCritical ||
+    chatgptNegationCritical ||
     (delta > 0.15 && hasNegation) ||
-    (chatgptAccuracy < 0.5 && ourAccuracy > 0.6);
+    chatgptAccuracy < 0.5;
 
-  let level: "SAFE" | "MODERATE" | "CRITICAL" = "SAFE";
-  if (isNegationCritical) level = "CRITICAL";
-  else if (isGenericDangerous || delta > 0.25) level = "MODERATE";
-
-  return { level, isGenericDangerous, isNegationCritical };
+  return {
+    ourDangerLevel,
+    isGenericDangerous,
+    hasNegation,
+  };
 }
 
 export async function runBenchmark(noteId: string, asrProvider: string) {
@@ -461,6 +472,30 @@ export async function runBenchmark(noteId: string, asrProvider: string) {
     chatgptNegationPreserved,
   );
 
+  const dataPayload = {
+    voiceNoteId: noteId,
+    language: note.languages,
+    specialty: note.title,
+    yourProvider: asrProvider,
+    yourTranscript: results.correctedTranscript,
+    yourWer: (actualWer * 100).toFixed(2),
+    yourNodesExtracted: results.ourNodes,
+    yourNodeCount: results.ourNodes?.length || 0,
+    yourNodeAccuracy: (yourNodeAcc * 100).toFixed(2),
+    yourMedicalTermAccuracy: (ourMta * 100).toFixed(2),
+    yourNegationPreserved: ourNegationPreserved,
+    chatgptOutput: JSON.stringify(results.baselines?.chatgpt),
+    chatgptNodes: results.baselines?.chatgpt,
+    chatgptNodeAccuracy: (chatgptNodeAcc * 100).toFixed(2),
+    baseline2Name: null,
+    baseline2Output: null,
+    baseline2NodeAccuracy: null,
+    dangerLevel: danger.ourDangerLevel,
+    negationCritical: danger.hasNegation,
+    genericAiDangerous: danger.isGenericDangerous,
+    testedAt: new Date(),
+  };
+
   try {
     const existing = await db
       .select()
@@ -472,30 +507,6 @@ export async function runBenchmark(noteId: string, asrProvider: string) {
         ),
       )
       .limit(1);
-
-    const dataPayload = {
-      voiceNoteId: noteId,
-      language: note.languages,
-      specialty: note.title,
-      yourProvider: asrProvider,
-      yourTranscript: results.correctedTranscript,
-      yourWer: (actualWer * 100).toFixed(2),
-      yourNodesExtracted: results.ourNodes,
-      yourNodeCount: results.ourNodes?.length || 0,
-      yourNodeAccuracy: (yourNodeAcc * 100).toFixed(2),
-      yourMedicalTermAccuracy: (ourMta * 100).toFixed(2),
-      yourNegationPreserved: ourNegationPreserved,
-      chatgptOutput: JSON.stringify(results.baselines?.chatgpt),
-      chatgptNodes: results.baselines?.chatgpt,
-      chatgptNodeAccuracy: (chatgptNodeAcc * 100).toFixed(2),
-      baseline2Name: null,
-      baseline2Output: null,
-      baseline2NodeAccuracy: null,
-      dangerLevel: danger.level,
-      negationCritical: danger.isNegationCritical,
-      genericAiDangerous: danger.isGenericDangerous,
-      testedAt: new Date(),
-    };
 
     if (existing.length > 0) {
       await db
@@ -510,5 +521,5 @@ export async function runBenchmark(noteId: string, asrProvider: string) {
     console.error("DB Upsert failed:", e);
   }
 
-  return { success: true, results };
+  return { success: true, results, row: dataPayload };
 }

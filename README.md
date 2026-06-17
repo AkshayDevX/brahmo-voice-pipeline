@@ -38,12 +38,16 @@ We have prepared comprehensive documentation files detailing the evaluation metr
 *   📖 **[Architecture & Cost Analysis Report](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/ARCHITECTURE_AND_COST.md)**: Brahmo ASR Router strategy, base infrastructure costs, and scaling projections (Pilot, Moderate, Scale).
 *   📖 **[Technical Walkthrough & Verification](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/WALKTHROUGH.md)**: Deep dive into chunking logic, negation handling, database mappings, and interactive review workflows.
 
+## 📡 Indic Conformer Microservice
+
+The local self-hosted fallback model is powered by AI4Bharat's **Indic-Conformer**, running as a FastAPI microservice. Since a full setup guide is provided in its repository, refer to the [Brahmo Voice Pipeline FastAPI Repository](https://github.com/AkshayDevX/brahmo-voice-pipeline-fastApi.git) to deploy it locally or on-premise.
+
 ---
 
 ## 🛠️ Setup & Running Locally
 
 ### Prerequisites
-*   [Bun](https://bun.sh) runtime installed.
+*   [Node.js](https://nodejs.org/) (v20+ recommended) installed.
 *   Supabase PostgreSQL database connection URL.
 *   API keys for Groq, Sarvam AI, and Gemini (baselines) configured.
 
@@ -58,24 +62,18 @@ GEMINI_API_KEY=your_gemini_api_key
 
 ### 1. Install Dependencies
 ```bash
-bun install
+npm install
 ```
 
 ### 2. Run Database Migrations
 Deploy schemas for `transcripts`, `knowledge_nodes`, `accuracy_results`, `asr_evaluations`, and `cost_analysis`:
 ```bash
-bun run db:push
+npm run db:push
 ```
 
-### 3. Seed Cost Projections & Evaluations
-Seeding script updates the tables with precise Sarvam tiered rates and actual pricing:
+### 3. Run the Dev Server
 ```bash
-bun run scripts/seed_cost_analysis.ts  # (if script exists, otherwise run database update script)
-```
-
-### 4. Run the Dev Server
-```bash
-bun run dev
+npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) to view the Benchmarking & Doctor Review Portal.
 
@@ -85,6 +83,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the Benchmarking & D
 
 To run the automated ASR accuracy metrics and node evaluations against the 20 code-mixed clinical test notes:
 ```bash
-bun run scripts/run_benchmarks.ts
+npx tsx scripts/run_benchmarks.ts
 ```
 *Calculated metrics (WER, MTA, Negation Preserved, Node Accuracy) will be saved directly to the PostgreSQL `accuracy_results` table.*

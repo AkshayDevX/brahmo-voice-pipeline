@@ -86,9 +86,9 @@ export default function AsrEvaluationReport({
 
   const providersToDisplay = [
     { key: "sarvam", name: "Sarvam AI (Saaras:v3)", color: "cyan" },
-    { key: "shunyalabs", name: "Shunyalabs Zero-Codeswitch", color: "purple" },
+    { key: "deepgram", name: "Deepgram Nova-3", color: "purple" },
+    { key: "shunyalabs", name: "Shunyalabs Zero-Codeswitch", color: "rose" },
     { key: "indic-conformer", name: "Local Indic-Conformer", color: "emerald" },
-    { key: "deepgram", name: "Deepgram Nova-3", color: "rose" },
     { key: "whisper", name: "Whisper Large V3 (Groq)", color: "blue" },
   ];
 
@@ -143,10 +143,10 @@ export default function AsrEvaluationReport({
               Runner-Up Engine
             </div>
             <div className="text-lg font-bold text-zinc-100 mt-0.5">
-              ShunyaLabs
+              Deepgram Nova-3
             </div>
             <div className="text-[10px] text-purple-400 font-mono mt-0.5">
-              WER ~70.5% | Node Acc 92.6%
+              WER ~77.4% | Node Acc 91.3%
             </div>
           </div>
         </div>
@@ -160,10 +160,10 @@ export default function AsrEvaluationReport({
               Failed Models
             </div>
             <div className="text-lg font-bold text-zinc-100 mt-0.5">
-              Deepgram & Conformer
+              ShunyaLabs & Conformer
             </div>
             <div className="text-[10px] text-rose-400 font-mono mt-0.5">
-              High WER / Word Drops
+              Low Acc / Negation Flips
             </div>
           </div>
         </div>
@@ -318,11 +318,11 @@ export default function AsrEvaluationReport({
               } else {
                 // Seed baseline averages if no DB rows yet
                 const seedData: Record<string, any> = {
-                  sarvam: { wer: 44.93, acc: 99.29, neg: 100.0 },
-                  shunyalabs: { wer: 70.5, acc: 92.56, neg: 95.0 },
-                  "indic-conformer": { wer: 100.68, acc: 81.25, neg: 90.0 },
-                  deepgram: { wer: 96.04, acc: 76.49, neg: 70.0 },
-                  whisper: { wer: 86.11, acc: 65.88, neg: 65.0 },
+                  sarvam: { wer: 44.87, acc: 99.29, neg: 100.0 },
+                  deepgram: { wer: 77.36, acc: 91.31, neg: 100.0 },
+                  shunyalabs: { wer: 71.47, acc: 81.44, neg: 90.0 },
+                  whisper: { wer: 86.0, acc: 71.42, neg: 80.0 },
+                  "indic-conformer": { wer: 100.68, acc: 77.56, neg: 95.0 },
                 };
                 avgWer = seedData[p.key]?.wer || 100;
                 avgNodeAcc = seedData[p.key]?.acc || 0;
@@ -331,7 +331,7 @@ export default function AsrEvaluationReport({
 
               // Set colors based on chosen/rejected
               const isBest = p.key === "sarvam";
-              const isRunnerUp = p.key === "shunyalabs";
+              const isRunnerUp = p.key === "deepgram";
 
               return (
                 <div
@@ -501,16 +501,22 @@ export default function AsrEvaluationReport({
                     </div>
                     <div className="text-xl font-bold text-zinc-100 font-mono mt-0.5">
                       {c.currency === "USD" ? "$" : "₹"}
-                      {parseFloat(c.monthlyCost || "0").toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
+                      {parseFloat(c.monthlyCost || "0").toLocaleString(
+                        undefined,
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        },
+                      )}
                     </div>
                     <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
                       Annual: {c.currency === "USD" ? "$" : "₹"}
-                      {parseFloat(c.annualCost || "0").toLocaleString(undefined, {
-                        maximumFractionDigits: 0,
-                      })}
+                      {parseFloat(c.annualCost || "0").toLocaleString(
+                        undefined,
+                        {
+                          maximumFractionDigits: 0,
+                        },
+                      )}
                     </div>
                     <div className="text-[9px] text-cyan-400 font-bold bg-cyan-400/5 border border-cyan-500/10 px-2 py-0.5 rounded-full mt-2 self-start sm:self-auto">
                       Cost/Note: {c.currency === "USD" ? "$" : "₹"}
@@ -575,17 +581,28 @@ export default function AsrEvaluationReport({
           <div className="flex flex-col gap-4 text-xs leading-relaxed">
             <div className="p-4 bg-purple-950/10 border border-purple-900/20 rounded-xl">
               <span className="font-bold text-purple-400 block mb-1">
-                ShunyaLabs (Zero-Codeswitch) — Second Runner-up
+                Deepgram Nova-3 — Runner-Up
               </span>
               <p className="text-zinc-400">
-                While ShunyaLabs achieves decent node extraction accuracy
-                (92.6%), it was not selected because Sarvam AI performed
-                significantly better across all benchmarks (average WER of 44.9%
-                vs 70.5% for ShunyaLabs, and node accuracy of 99.3% vs 92.6%).
-                Additionally, it is rejected due to strict rate limits on the
-                developer API keys (crashing on concurrent benchmarking
-                requests) and transcribing into native scripts instead of
-                transliterated Romanized text.
+                Deepgram Nova-3 achieved good node extraction accuracy (91.31%),
+                making it the runner-up. However, it was not selected because it
+                repeatedly drops regional Indic words or warps them into
+                phonetically similar English words, causing clinical risk.
+                Additionally, it lacks a native transliteration mode, outputting
+                native scripts that result in a high WER (77.36%) against
+                Romanized references.
+              </p>
+            </div>
+            <div className="p-4 bg-rose-950/10 border border-rose-900/20 rounded-xl">
+              <span className="font-bold text-rose-400 block mb-1">
+                ShunyaLabs (Zero-Codeswitch) — Failed
+              </span>
+              <p className="text-zinc-400">
+                Demoted due to worse performance than before (average node
+                extraction accuracy dropped to 81.44%, negation preservation
+                90.00%). Additionally, it is rejected due to strict rate limits
+                on the developer API keys (2 req/min) that crash automated
+                concurrent benchmarks, and it transcribes into native scripts.
               </p>
             </div>
             <div className="p-4 bg-rose-950/15 border border-rose-900/25 rounded-xl">
@@ -595,19 +612,8 @@ export default function AsrEvaluationReport({
               <p className="text-zinc-400">
                 The self-hosted Indic-Conformer failed in key areas. It
                 repeatedly drops English medical terms, struggles with mixed
-                language inputs, has high overall WER (100.7%), and lacks native
-                phonetic transliteration which causes parsing errors.
-              </p>
-            </div>
-            <div className="p-4 bg-rose-950/10 border border-rose-900/20 rounded-xl">
-              <span className="font-bold text-rose-400 block mb-1">
-                Deepgram Nova-3 — Failed
-              </span>
-              <p className="text-zinc-400">
-                Deepgram repeatedly drops regional Indic words or warps them
-                into phonetically similar English words (e.g. converting
-                negation "nahi" or "kudadu" to English verbs), leading to severe
-                clinical risk. Additionally, it lacks a transliteration mode.
+                language inputs, has high overall WER (100.68%), and lacks
+                native phonetic transliteration which causes parsing errors.
               </p>
             </div>
           </div>

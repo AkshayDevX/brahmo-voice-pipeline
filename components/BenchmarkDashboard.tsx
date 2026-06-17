@@ -25,20 +25,6 @@ import { type Note, runBenchmark } from "../actions/benchmark";
 
 const PROVIDERS = [
   {
-    value: "bilingual-auto",
-    label: "Bilingual (Auto-Route)",
-    native: "Whisper LID + Conformer",
-    provider: "Hybrid Local/Cloud",
-    group: "Smart Routing",
-  },
-  {
-    value: "router",
-    label: "Brahmo ASR Router",
-    native: "Whisper + Sarvam",
-    provider: "ASR Routing",
-    group: "Smart Routing",
-  },
-  {
     value: "sarvam",
     label: "Sarvam AI Saaras:v3",
     native: "Translit Mode",
@@ -54,7 +40,7 @@ const PROVIDERS = [
   },
   {
     value: "deepgram",
-    label: "Deepgram Nova-2",
+    label: "Deepgram Nova-3",
     native: "Medical Model",
     provider: "Deepgram API",
     group: "Cloud Engines",
@@ -320,18 +306,20 @@ export default function BenchmarkDashboard({
     setRunningNoteId(noteId);
     startTransition(async () => {
       try {
-        await runBenchmark(noteId, asrProvider);
-        setDbResults((prev) => {
-          const exists = prev.findIndex(
-            (p) => p.voiceNoteId === noteId && p.yourProvider === asrProvider,
-          );
-          if (exists >= 0) {
-            const newArr = [...prev];
-            newArr[exists] = { ...newArr[exists], yourProvider: asrProvider };
-            return newArr;
-          }
-          return [...prev, { voiceNoteId: noteId, yourProvider: asrProvider }];
-        });
+        const res = await runBenchmark(noteId, asrProvider);
+        if (res.success && res.row) {
+          setDbResults((prev) => {
+            const exists = prev.findIndex(
+              (p) => p.voiceNoteId === noteId && p.yourProvider === asrProvider,
+            );
+            if (exists >= 0) {
+              const newArr = [...prev];
+              newArr[exists] = res.row;
+              return newArr;
+            }
+            return [...prev, res.row];
+          });
+        }
       } catch (err) {
         console.error("Failed to run benchmark:", err);
       } finally {
@@ -347,14 +335,21 @@ export default function BenchmarkDashboard({
     for (const note of notes) {
       setRunningNoteId(note.id);
       try {
-        await runBenchmark(note.id, asrProvider);
-        setDbResults((prev) => {
-          const exists = prev.findIndex(
-            (p) => p.voiceNoteId === note.id && p.yourProvider === asrProvider,
-          );
-          if (exists >= 0) return prev;
-          return [...prev, { voiceNoteId: note.id, yourProvider: asrProvider }];
-        });
+        const res = await runBenchmark(note.id, asrProvider);
+        if (res.success && res.row) {
+          setDbResults((prev) => {
+            const exists = prev.findIndex(
+              (p) =>
+                p.voiceNoteId === note.id && p.yourProvider === asrProvider,
+            );
+            if (exists >= 0) {
+              const newArr = [...prev];
+              newArr[exists] = res.row;
+              return newArr;
+            }
+            return [...prev, res.row];
+          });
+        }
       } catch (e) {
         console.error(`Failed on note ${note.id}:`, e);
       }
@@ -369,6 +364,50 @@ export default function BenchmarkDashboard({
   const providerResults = dbResults
     .filter((r) => r.yourProvider === asrProvider)
     .sort((a, b) => (a.voiceNoteId || "").localeCompare(b.voiceNoteId || ""));
+
+  const isChatgptNegationMissed = (r: any) => {
+    if (!r.negationCritical) return false;
+    const nodesStr = JSON.stringify(r.chatgptNodes || {}).toLowerCase();
+    const negationIndicators = [
+      "do not",
+      "don't",
+      "must not",
+      "cannot",
+      "should not",
+      "shouldn't",
+      "does not",
+      "doesn't",
+      "doesnt",
+      "no response",
+      "not respond",
+      "without",
+      "if no",
+      "if not",
+      "stop",
+      "avoid",
+      "discontinue",
+      "refusal",
+      "refused",
+      "no oral",
+      "not give",
+      "don't give",
+      "contraindicated",
+      "not recommended",
+      "critical negation",
+      "no nsaid",
+      "ivvakudadu",
+      "ivvaledu",
+      "kudadhu",
+      "mat do",
+      "paadilla",
+      "venda",
+      "nako",
+      "beda",
+    ];
+    return !negationIndicators.some((indicator) =>
+      nodesStr.includes(indicator.toLowerCase()),
+    );
+  };
 
   const getCompositeScore = (r: any) => {
     const werVal = Number(r.yourWer || 0);
@@ -422,9 +461,7 @@ export default function BenchmarkDashboard({
     providerResults.length > 0
       ? (negationPreservedCount / providerResults.length) * 100
       : 0;
-  const dangerousCases = providerResults.filter(
-    (r) => r.genericAiDangerous || r.dangerLevel === "CRITICAL",
-  );
+  const dangerousCases = providerResults.filter((r) => r.genericAiDangerous);
   const _criticalCases = providerResults.filter(
     (r) => r.dangerLevel === "CRITICAL",
   );
@@ -610,7 +647,7 @@ export default function BenchmarkDashboard({
               <tbody>
                 {providerResults.map((r) => {
                   const isCritical = r.dangerLevel === "CRITICAL";
-                  const isDangerous = r.genericAiDangerous;
+                  const isModerate = r.dangerLevel === "MODERATE";
                   const compositeScore = getCompositeScore(r);
                   return (
                     <tr
@@ -618,7 +655,7 @@ export default function BenchmarkDashboard({
                       className={`border-b border-zinc-800/50 transition-colors ${
                         isCritical
                           ? "bg-red-950/20"
-                          : isDangerous
+                          : isModerate
                             ? "bg-amber-950/10"
                             : "hover:bg-zinc-900/50"
                       }`}
@@ -661,7 +698,7 @@ export default function BenchmarkDashboard({
                           <span className="text-xs bg-red-900/30 text-red-400 px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
                             <ShieldAlert className="w-3 h-3" /> CRITICAL
                           </span>
-                        ) : isDangerous ? (
+                        ) : isModerate ? (
                           <span className="text-xs bg-amber-900/30 text-amber-400 px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
                             <AlertTriangle className="w-3 h-3" /> MODERATE
                           </span>
@@ -707,12 +744,12 @@ export default function BenchmarkDashboard({
                     </span>
                     <span
                       className={`text-xs px-2 py-0.5 rounded-full ${
-                        r.dangerLevel === "CRITICAL"
+                        r.negationCritical
                           ? "bg-red-900/50 text-red-300"
                           : "bg-amber-900/50 text-amber-300"
                       }`}
                     >
-                      {r.dangerLevel}
+                      {r.negationCritical ? "CRITICAL" : "MODERATE"}
                     </span>
                   </div>
                   <h4 className="text-sm font-semibold text-zinc-200 mb-1">
@@ -744,7 +781,7 @@ export default function BenchmarkDashboard({
                       </span>
                     </div>
                   </div>
-                  {r.negationCritical && (
+                  {isChatgptNegationMissed(r) && (
                     <p className="text-xs text-red-400 mt-2 flex items-center gap-1">
                       <AlertCircle className="w-3 h-3" /> Negation missed by
                       generic AI — patient safety risk

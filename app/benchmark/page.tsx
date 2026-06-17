@@ -32,7 +32,7 @@ async function BenchmarkContainer({
   searchParams: Promise<{ asr?: string }>;
 }) {
   const { asr } = await searchParams;
-  const asrProvider = asr || "router";
+  const asrProvider = asr || "sarvam";
 
   const notes = await getCachedTestNotes();
   const results = await getCachedAccuracyResultsForAsr(asrProvider);
