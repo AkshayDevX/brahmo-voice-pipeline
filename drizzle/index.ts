@@ -9,5 +9,5 @@ export const db = drizzle({
   client: sql,
   schema,
   relations: schema.relations,
-  logger: process.env.NODE_ENV !== "production",
+  logger: false,
 });
