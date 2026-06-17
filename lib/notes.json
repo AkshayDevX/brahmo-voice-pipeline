@@ -1,0 +1,778 @@
+[
+  {
+    "id": "VN-01",
+    "title": "ORTHO GP FOLLOW-UP",
+    "languages": "Telugu-English",
+    "doctor": "Dr. Sharma, Hyderabad",
+    "context": "After seeing Ramaiah (68M, cardiac stent, chronic knee pain) — 9th visit",
+    "transcript": "Ramaiah uncle vacharu, same story, molli noppi tho bothered avthunnaru, Ibuprofen\nkavali ani aduguthunnaru malli, ninth time aduguthunnaru, stent undi kadha ivvakudadu\nani cheppanu malli, family ki kuda cheppanu — koduku kuda aduguthadu phone chesi —\nParacetamol 650 QDS continue, Tramadol 50 add chesthunna ippudu VAS 7 undi, topical\nDiclofenac gel okay kaani oral NSAIDs enduku ivvakudado malli explain chesanu,\nnext week ki rammani cheppanu, aa lopu dizziness vosthe call cheyamani cheppanu\nTramadol valla, and Priya sister ki cheppandi vitals record cheyamani.",
+    "translation": "Ramaiah uncle came, same complaint, bothered by knee pain, asking for Ibuprofen AGAIN (9th time), told him can't give due to stent, also told family — son also calls asking — Paracetamol 650 QDS continue, adding Tramadol 50 now because VAS is 7, topical Diclofenac gel is okay but explained again why no oral NSAIDs, told him to come next week, if dizziness from Tramadol then call, and tell Nurse Priya to record vitals.",
+    "expected_nodes": [
+      {
+        "type": "CONSTRAINT",
+        "content": "Ramaiah — NO oral NSAIDs (9th refusal documented, stent, family also requesting)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Tramadol 50mg added (VAS 7, escalation from Paracetamol alone)"
+      },
+      {
+        "type": "FACT",
+        "content": "Family behavior — son calls requesting Ibuprofen, needs continued education"
+      },
+      {
+        "type": "DECISION",
+        "content": "Follow-up next week, monitor dizziness (Tramadol side effect)"
+      }
+    ],
+    "why_fails": [
+      "\"ivvakudadu\" (must not give) appears TWICE — negation critical both times",
+      "\"ninth time aduguthunnaru\" — behavioral pattern tracking, not just a number",
+      "\"oral NSAIDs enduku ivvakudado\" — the reason WHY not to give, in Telugu",
+      "\"Priya sister ki cheppandi\" — instruction to nurse, not a clinical decision",
+      "The entire note has ONE continuous thought stream with no punctuation"
+    ]
+  },
+  {
+    "id": "VN-02",
+    "title": "MEDICINE WARD ROUND",
+    "languages": "Hindi-English",
+    "doctor": "Dr. Meera, Delhi",
+    "context": "Dictating about 3 patients during morning rounds — rapid switching",
+    "transcript": "Bed 14 Sharma ji — sugar fasting 280 hai post-prandial 380, Metformin 1000 BD chal\nraha hai lekin kaam nahi kar raha, Glimepiride 2 se 4 karo, nahi nahi wait karo pehle\nHbA1c dekho result aaya kya pharmacy se, agar 9 se zyada hai to seedha insulin start\nkarna padega, Lantus 10 units raat ko — okay next — bed 16 Gupta aunty — BP aaj\ntheek hai 130 by 80, Telmisartan 40 continue, potassium low tha kal 3.2 tha aaj ka\nresult aaya kya check karo, Dytor se potassium girta hai — okay next — bed 18\nYadav sahab — discharge karo aaj, medicines likho — Tab Ecosprin 75 OD, Tab Atorva\n40 HS, Tab Metolar 50 BD, Tab Pan 40 OD empty stomach, follow-up 2 hafte mein,\nagar chest pain aaye to seedha emergency aaye mat ghar pe baitho.",
+    "translation": "Three patients in rapid sequence during ward rounds: Sharma (sugar uncontrolled, considering insulin), Gupta (BP stable, potassium monitoring needed), Yadav (discharge with 4-drug prescription and emergency instructions).",
+    "expected_nodes": [
+      {
+        "type": "DECISION",
+        "content": "Sharma — Glimepiride 2→4mg pending HbA1c; if HbA1c > 9 → Lantus 10u HS"
+      },
+      {
+        "type": "FACT",
+        "content": "Gupta — BP 130/80 stable on Telmisartan 40, potassium was 3.2 (low, Dytor side effect)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Yadav discharge — Ecosprin 75, Atorvastatin 40, Metoprolol 50 BD, Pantoprazole 40"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Yadav — if chest pain, come to emergency IMMEDIATELY, don't wait at home"
+      }
+    ],
+    "why_fails": [
+      "Self-correction mid-sentence: \"Glimepiride 2 se 4 karo, nahi nahi wait karo\" — doctor changes mind",
+      "Three patients in ONE voice note — must separate context",
+      "\"Ecosprin\" \"Atorva\" \"Metolar\" \"Pan\" — all Indian brand names",
+      "\"mat ghar pe baitho\" (don't sit at home) — negation in colloquial Hindi",
+      "\"Dytor se potassium girta hai\" — clinical reasoning about drug side effect"
+    ]
+  },
+  {
+    "id": "VN-03",
+    "title": "PAEDIATRICS",
+    "languages": "Tamil-English",
+    "doctor": "Dr. Lakshmi, Chennai",
+    "context": "After seeing Aadhya (3.5F, penicillin allergy, recurrent ear infections) — mother is anxious",
+    "transcript": "Aadhya baby ku ippo fifth time ear infection, amma romba worried — amoxicillin\nkudukka kudadhu allergy iruku 18 months la anaphylaxis vanthuchu amma ku explain\npanninom but amma every time kekuranga amoxicillin than work aagum nu —\nazithromycin 10mg per kg 3 days start pannanum, weight 14kg so total 140mg per\nday, oru 5ml spoon la suspend pannunga, ENT referral write pannunga Dr. Krishnan\nku — ippadi frequent ah varthu na adenoid check pannanum, tympanometry pannanum,\nhearing test kuda pannanum — amma kitta sollunga next week appointment fix\npanniduvom ENT ku, aana ippo azithromycin start pannidalam paravaillai.",
+    "translation": "Aadhya's 5th ear infection, mother is very worried, keeps asking for amoxicillin despite anaphylaxis history, prescribed azithromycin weight-based (14kg × 10mg = 140mg), ENT referral to Dr. Krishnan needed — if this frequent need to check adenoids, tympanometry, hearing test. Start azithromycin now, ENT appointment next week.",
+    "expected_nodes": [
+      {
+        "type": "CONSTRAINT",
+        "content": "Aadhya — NO amoxicillin/penicillin (anaphylaxis at 18 months, mother repeatedly requests)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Azithromycin 140mg/day (10mg/kg × 14kg) × 3 days"
+      },
+      {
+        "type": "DECISION",
+        "content": "ENT referral to Dr. Krishnan — adenoid check, tympanometry, hearing test"
+      },
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Mother behavior — requests amoxicillin every visit despite allergy education"
+      },
+      {
+        "type": "FACT",
+        "content": "5th ear infection — frequency pattern warrants ENT evaluation"
+      }
+    ],
+    "why_fails": [
+      "\"kudukka kudadhu\" (must not give) — Tamil double negative, critical for patient safety",
+      "Weight-based calculation embedded in speech: \"10mg per kg...weight 14kg so 140mg\"",
+      "\"amma every time kekuranga\" — behavioral pattern in Tamil",
+      "\"paravaillai\" (it's okay) at the end — contextual approval to start, not a medical term",
+      "Clinical reasoning chain: frequent infections → adenoid suspicion → ENT referral"
+    ]
+  },
+  {
+    "id": "VN-04",
+    "title": "CARDIOLOGY CCU",
+    "languages": "Telugu-English",
+    "doctor": "Dr. Vikram, Hyderabad",
+    "context": "After emergency admission — Mr. Rajan's chest pain episode",
+    "transcript": "Rajan garu CCU lo admit ayyaru chest pain tho, ECG lo ST elevation V1 to V4\nanterior wall MI, troponin send chesamu stat result kosam wait chesthunnam,\nCath lab ni alert chesamu — kaani problem emitante Rajan gari ki already Warfarin\nchal thundi INR 2.8 undi, dual antiplatelet start cheyali kaani bleeding risk\nekkuva, so Heparin bolus ivvandi 60 units per kg but max 4000 units, Clopidogrel\n300mg loading dose ivvandi — KAANI Aspirin loading dose ivvakandi INR ekkuva\nundi kadha Warfarin valla — cardiology fellow ki cheppandi Dr. Ravi ki — ayana\ncath lab lo wait chesthadu — family ki cheppandi serious condition ani consent\nform sign cheyinchandi cath ki — oxygen 4 litre nasal prongs, Morphine 2mg IV\npain kosam ichi already — vitals every 15 minutes.",
+    "translation": "Rajan admitted to CCU with chest pain, ECG shows anterior STEMI (V1-V4), troponin sent stat, cath lab alerted. KEY DILEMMA: already on Warfarin with INR 2.8, needs dual antiplatelet but high bleeding risk. Give Heparin 60u/kg (max 4000u), Clopidogrel 300mg loading — BUT DON'T give Aspirin loading (INR too high on Warfarin). Call cardiology fellow Dr. Ravi, tell family it's serious, get cath consent, oxygen 4L, already gave Morphine 2mg IV.",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Rajan — anterior STEMI (ST elevation V1-V4), admitted CCU"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "DO NOT give Aspirin loading — INR 2.8 on Warfarin, bleeding risk"
+      },
+      {
+        "type": "DECISION",
+        "content": "Heparin 60u/kg (max 4000u) + Clopidogrel 300mg loading"
+      },
+      {
+        "type": "DECISION",
+        "content": "Morphine 2mg IV given for pain, O2 4L nasal prongs"
+      },
+      {
+        "type": "DECISION",
+        "content": "Cath lab activation, Dr. Ravi (fellow) informed"
+      }
+    ],
+    "why_fails": [
+      "\"KAANI Aspirin loading dose ivvakandi\" — \"KAANI\" (BUT) signals a CRITICAL exception, \"ivvakandi\" = DON'T give",
+      "Complex clinical reasoning: Warfarin + STEMI → can't use standard dual antiplatelet protocol",
+      "\"60 units per kg but max 4000 units\" — conditional dosing with ceiling",
+      "Multiple simultaneous instructions to different people (nurse, fellow, family)",
+      "\"INR ekkuva undi kadha Warfarin valla\" — the REASON embedded in Telugu"
+    ]
+  },
+  {
+    "id": "VN-05",
+    "title": "GP CLINIC",
+    "languages": "Hindi-English",
+    "doctor": "Dr. Singh, Mumbai",
+    "context": "Frustrated with non-compliant diabetic patient — Padma aunty (62F, fasting)",
+    "transcript": "Padma aunty ka case bahut frustrating hai — sugar 380 aa raha hai fasting, maine\nbola tha Ekadashi ko Glimepiride skip karo lekin aunty ne suna nahi, dono tablet\nkha li khali pet, hypoglycemia ho gaya ghar pe, bete ne phone kiya ki aunty behosh\nho gayi — thankfully glucose de diya — ab main kya karun — Glimepiride 2mg se 1mg\nkaro pehle, Metformin 1000 continue, HbA1c karwao, agar 8 se zyada hai to Insulin\npe shift karna padega — Padma aunty ke bete ko bolo ki Ekadashi ke din SIRF\nMetformin dena, Glimepiride bilkul nahi, aur fast break karne ka time fix karo\nsham 6 baje, usse pehle BG check karo har 4 ghante — aur haan dietician referral\ndo aunty ko — low glycemic index wala diet chahiye fasting ke liye.",
+    "translation": "Frustrated: Padma's sugar 380 fasting, told her to skip Glimepiride on Ekadashi but she didn't listen, took both tablets on empty stomach, had hypoglycemia at home, son called saying she fainted. Reducing Glimepiride 2mg→1mg, Metformin continue, HbA1c needed — if >8 switch to insulin. Tell son: ONLY Metformin on Ekadashi, NO Glimepiride, fix fast-break time at 6pm, BG every 4 hours. Dietician referral for low-GI fasting diet.",
+    "expected_nodes": [
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Padma took Glimepiride on fasting day despite instructions → hypoglycemia episode"
+      },
+      {
+        "type": "DECISION",
+        "content": "Reduce Glimepiride 2mg→1mg, conditional insulin if HbA1c > 8"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Ekadashi days — ONLY Metformin, NO Glimepiride (patient AND son must be told)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Fixed fast-break time 6pm, BG monitoring q4h on fast days"
+      },
+      {
+        "type": "DECISION",
+        "content": "Dietician referral for low-GI fasting diet"
+      },
+      {
+        "type": "FACT",
+        "content": "Hypoglycemia event — patient fainted at home, son administered glucose"
+      }
+    ],
+    "why_fails": [
+      "\"aunty ne suna nahi\" (didn't listen) — non-compliance narrative in Hindi",
+      "\"dono tablet kha li khali pet\" — took BOTH tablets on empty stomach (clinical error by patient)",
+      "\"Glimepiride bilkul nahi\" — emphatic negation \"absolutely not\"",
+      "\"haan dietician referral do\" — \"haan\" (yes) is self-talk, not clinical",
+      "The FRUSTRATION in the doctor's tone changes speech pattern — more Hindi, less English"
+    ]
+  },
+  {
+    "id": "VN-06",
+    "title": "SURGERY PRE-OP",
+    "languages": "Kannada-English",
+    "doctor": "Dr. Rao, Bangalore",
+    "context": "Planning for Ramaiah's TKR surgery — complex medication management",
+    "transcript": "Ramaiah avrige TKR surgery plan maadthiddivi next week, problem enu andre\nWarfarin chal aagidhe, INR 2.6 idhe, surgery ge 5 dina munche Warfarin\nnillisbekku, Heparin bridging start maadbekku Enoxaparin 60mg BD, INR 1.5 ge\nbarbekku surgery munche — Cardiology team Dr. Mehta ge discuss maadbekku because\nstent idhe 2022 nalli — Clopidogrel 7 days munche nillisbekku but Aspirin\ncontinue maadona last minute vargu — anaesthesia team ge helbekku difficult\nairway iddare, pre-op blood work CBC, RFT, LFT, coagulation profile, chest\nX-ray, ECG — physiotherapy team ge inform maadi post-op day 1 ne PT start\naagbekku — Priya sister ge helu special attention Warfarin restart timing\npost-op Dr. Mehta decide maadthare.",
+    "translation": "Planning Ramaiah's TKR next week. Problem: on Warfarin (INR 2.6) — stop 5 days before, bridge with Enoxaparin 60mg BD, target INR 1.5 pre-op. Discuss with Cardiology (Dr. Mehta) because of stent (2022). Stop Clopidogrel 7 days before but continue Aspirin until last moment. Inform anaesthesia (possible difficult airway). Pre-op workup: CBC, RFT, LFT, coagulation, CXR, ECG. PT team: start Day 1 post-op. Nurse Priya: special attention to Warfarin restart timing — Dr. Mehta decides.",
+    "expected_nodes": [
+      {
+        "type": "DECISION",
+        "content": "TKR next week — Warfarin stop 5 days pre-op, Enoxaparin 60mg BD bridging"
+      },
+      {
+        "type": "DECISION",
+        "content": "Stop Clopidogrel 7 days pre-op, continue Aspirin until last moment"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Must discuss with Cardiology (Dr. Mehta) — stent 2022"
+      },
+      {
+        "type": "DECISION",
+        "content": "Pre-op workup list (CBC, RFT, LFT, coagulation, CXR, ECG)"
+      },
+      {
+        "type": "DECISION",
+        "content": "PT start Day 1 post-op"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Warfarin restart timing decided by Cardiology, not surgery"
+      }
+    ],
+    "why_fails": [
+      "\"nillisbekku\" (must stop) — different from \"nillisi\" (stop) — urgency in Kannada",
+      "Multiple teams coordinated in one note (surgery, cardiology, anaesthesia, PT, nursing)",
+      "\"last minute vargu\" (until last moment) — colloquial Kannada-English timing",
+      "\"Dr. Mehta decide maadthare\" — attribution of decision authority to another doctor",
+      "Complex perioperative anticoagulation reasoning in code-mixed speech"
+    ]
+  },
+  {
+    "id": "VN-07",
+    "title": "PSYCHIATRY",
+    "languages": "Bengali-English",
+    "doctor": "Dr. Sen, Kolkata",
+    "context": "After seeing a depressed patient — Arun (45M, first episode, reluctant about medication)",
+    "transcript": "Arun babu ashechilen aaj, PHQ-9 score 18 porjonto bere gechhe, moderate to severe\ndepression, ghum nei rate — 3-4 ghonta matro, khabar khacche na thik moto — 5kg\nweight kome gechhe last 2 months e — Nexito 10mg raat e start korte hobe, kaaj na\nkorle 2 week pore 20mg te barhabo — Clonazepam 0.5mg raat e initially neend er jonno\nkaaron Nexito te first 2 weeks e insomnia barte pare — important kotha — Arun babu\nantidepressant nite raaji non, bolchhen 'pagol er oshudh' — bolechhi je ei oshudh\ndiabetes er oshudh er moto, brain er chemical balance correct kore — tai ke bolo\nnext visit e ashe je counseling o shuru korbo — suicidal ideation nei ekhon but\nsafety plan discuss korechhi, wife er number niye rekhechhi emergency te — follow-up\n1 week e.",
+    "translation": "Arun came today, PHQ-9 risen to 18 (moderate-severe), not sleeping (3-4 hours only), not eating properly — lost 5kg in 2 months. Starting Escitalopram 10mg at night, increase to 20mg in 2 weeks if not working. Clonazepam 0.5mg at night initially for sleep because Escitalopram may worsen insomnia first 2 weeks. IMPORTANT: Arun refuses antidepressant — calls it \"pagol er oshudh\" (madman's medicine). Explained it's like diabetes medicine — corrects brain chemical balance. Told wife to bring him next visit for counseling. No suicidal ideation currently but discussed safety plan, took wife's emergency number. Follow-up 1 week.",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Arun — PHQ-9: 18, insomnia (3-4hr), anorexia, 5kg weight loss in 2 months"
+      },
+      {
+        "type": "DECISION",
+        "content": "Start Escitalopram 10mg HS → increase to 20mg if no response in 2 weeks"
+      },
+      {
+        "type": "DECISION",
+        "content": "Clonazepam 0.5mg HS temporarily (Escitalopram initial insomnia risk)"
+      },
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Patient stigma — calls antidepressant \"pagol er oshudh\" (madman's medicine)"
+      },
+      {
+        "type": "FACT",
+        "content": "No suicidal ideation currently, safety plan discussed, wife's emergency number obtained"
+      },
+      {
+        "type": "DECISION",
+        "content": "Counseling to start next visit, wife to accompany"
+      }
+    ],
+    "why_fails": [
+      "\"pagol er oshudh\" — Bengali slang for psychiatric medication stigma, not translatable",
+      "\"Nexito\" → brand name for Escitalopram, ChatGPT sees \"next to\"",
+      "The therapeutic reasoning: WHY Clonazepam added (initial insomnia from SSRI) — embedded in Bengali",
+      "\"raaji non\" (not agreeing) — negation in Bengali, patient's refusal",
+      "Safety assessment embedded naturally — not structured"
+    ]
+  },
+  {
+    "id": "VN-08",
+    "title": "OB-GYN",
+    "languages": "Malayalam-English",
+    "doctor": "Dr. Parvathy, Kochi",
+    "context": "After prenatal visit — high-risk pregnancy with pre-eclampsia risk",
+    "transcript": "Meera chechi 32 weeks aayallo, BP innale 148 by 92 aayirunnu innu 152 by 96\naanu, urine protein 2+ aanu — pre-eclampsia concern undu — Labetalol 100mg BD\nstart cheyyuka, ACE inhibitor paadilla pregnancy yil absolutely contraindicated\naanu, Methyldopa aanu alternative — but Labetalol try cheyyam aadyam —\n24-hour urine protein collection start cheyyamaanu, complete blood count\nplatelets eppol check cheyyuka, LDH uric acid liver enzymes ellaam cheyyuka\nHELLP rule out cheyyaan — baby yude growth scan next week, CTG biweekly\nstart cheyyuka — Meera chechi yodu paranju bed rest suggest cheyyu but\ncomplete bed rest venda moderate activity okay aanu — eppozhaanu hospital\nil varanam enu paranjittundu — headache visual disturbance epigastric pain\ningane enthenkilum undenkil udan varanam — husband odu koodhi paranju\nemergency signs — next visit 3 days kazhinju.",
+    "translation": "Meera at 32 weeks, BP rising (148/92 → 152/96), urine protein 2+ — pre-eclampsia concern. Start Labetalol 100mg BD. ACE inhibitor ABSOLUTELY contraindicated in pregnancy. Methyldopa is alternative but trying Labetalol first. 24-hr urine protein collection, CBC with platelets NOW, LDH, uric acid, liver enzymes — rule out HELLP. Growth scan next week, biweekly CTG. Told Meera: moderate bed rest (not complete), come to hospital if headache, visual disturbance, or epigastric pain. Explained emergency signs to husband also. Follow-up in 3 days.",
+    "expected_nodes": [
+      {
+        "type": "CONSTRAINT",
+        "content": "ACE inhibitor ABSOLUTELY contraindicated in pregnancy"
+      },
+      {
+        "type": "DECISION",
+        "content": "Labetalol 100mg BD started for pre-eclampsia (alternative: Methyldopa)"
+      },
+      {
+        "type": "DECISION",
+        "content": "HELLP workup: 24hr urine protein, CBC+platelets, LDH, uric acid, LFT"
+      },
+      {
+        "type": "DECISION",
+        "content": "Growth scan next week, biweekly CTG"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Emergency signs — headache, visual disturbance, epigastric pain → immediate hospital"
+      },
+      {
+        "type": "FACT",
+        "content": "Meera 32 weeks — BP 152/96, urine protein 2+, pre-eclampsia suspected"
+      }
+    ],
+    "why_fails": [
+      "\"paadilla\" (must not) → Malayalam negation lost → could generate \"give ACE inhibitor\"",
+      "\"cheyyamaanu\" (should be done) → complex Malayalam verb → garbled",
+      "\"venda\" (don't want/need) — \"complete bed rest venda\" → negation for bed rest",
+      "\"ingane enthenkilum undenkil udan varanam\" — conditional emergency instruction in pure Malayalam",
+      "Multiple care plans in one note (maternal, fetal, labs, follow-up)"
+    ]
+  },
+  {
+    "id": "VN-09",
+    "title": "EMERGENCY MEDICINE",
+    "languages": "Hindi-English",
+    "doctor": "Dr. Kapoor, Delhi",
+    "context": "Active resuscitation — speaking FAST, giving orders",
+    "transcript": "Multiple trauma hai RTA sixteen year old ladka — GCS 9 hai E2V3M4 —\nintubation karo size 7 tube — C-spine collar lagao pehle — BP 80 by 50 hai\nNS bolus do 20ml per kg stat means 1 litre do — type and cross match karo\n4 units PRBC — ek haath mein wide bore cannula daalo 16 gauge — doosre\nhaath mein bhi ek aur — Tetanus TT do kya history hai check karo — chest\nX-ray portable karo pneumothorax rule out karo left side pe breath sounds\nkam hain — CT head stat karo — neuro ko bulao Dr. Verma ko — ortho ko bhi\nbulao right femur deformed lag raha hai — parents ko bulao consent chahiye —\nagar BP respond nahi karta NS ke baad to blood shuru karo — Tranexamic\nacid 1 gram over 10 min do — urine catheter daalo urine output monitor\nkaro — FAST ultrasound karo free fluid check karo!",
+    "translation": "Multiple trauma, 16-year-old boy, RTA. GCS 9 (E2V3M4). Intubate with size 7 tube — C-spine collar FIRST. BP 80/50 — NS bolus 20ml/kg = 1 litre stat. Type and crossmatch 4 units PRBC. Two wide bore cannulas 16G. Check tetanus history. Portable CXR — rule out pneumothorax (decreased breath sounds left). Stat CT head. Call Neuro (Dr. Verma) and Ortho (right femur deformity). Call parents for consent. If BP doesn't respond to NS → start blood. Tranexamic acid 1g over 10 min. Foley catheter, monitor urine output. FAST scan for free fluid.",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "16M, RTA, GCS 9 (E2V3M4), BP 80/50, left decreased breath sounds, right femur deformity"
+      },
+      {
+        "type": "DECISION",
+        "content": "Intubate 7.0 ET, C-spine collar first, bilateral 16G IV access"
+      },
+      {
+        "type": "DECISION",
+        "content": "NS 20ml/kg (1L) stat → if no response → blood transfusion"
+      },
+      {
+        "type": "DECISION",
+        "content": "Tranexamic acid 1g/10min, 4 units PRBC crossmatched"
+      },
+      {
+        "type": "DECISION",
+        "content": "CT head stat, CXR portable (pneumothorax r/o), FAST scan"
+      },
+      {
+        "type": "DECISION",
+        "content": "Neuro (Dr. Verma) + Ortho consults called"
+      }
+    ],
+    "why_fails": [
+      "Extremely rapid speech with no pauses or punctuation",
+      "\"C-spine collar lagao pehle\" — order of operations critical (collar BEFORE intubation)",
+      "\"agar BP respond nahi karta...to blood shuru karo\" — conditional in rapid Hindi",
+      "Multiple simultaneous orders to different team members",
+      "\"16 gauge\" \"size 7\" \"20ml per kg\" — numbers embedded in rapid stream"
+    ]
+  },
+  {
+    "id": "VN-10",
+    "title": "DERMATOLOGY",
+    "languages": "Gujarati-English",
+    "doctor": "Dr. Patel, Ahmedabad",
+    "context": "After seeing a child with severe eczema — mother using wrong treatment",
+    "transcript": "Arjun baby ne eczema vadhare kharab thayo che — mummy homeopathy ni\ngoli aapi rahi che sathe sathe, mane khabar nahi kem jaldi nathi thatu —\nmaine dekha ki ek steroid cream lagavi che jeni koi prescription nathi —\nmedical store wale ne aa cream aapi — bahut strong Clobetasol 0.05% face\npe lagavi che! — bachche ke face pe Class 1 steroid nahi lagana — skin\natrophy thay jase — abhi Mometasone 0.1% shift karo — face pe sirf 5 din,\nbody pe 10 din — moisturizer din ma chaar vaar lagavo — Cetaphil ya\nPhysiogel — emollient pehle fir steroid upar se — bathing routine change\nkaro lukewarm water sirf 5 minute — mummy ne samjhavo ki homeopathy band\nkaro jab tak allopathy chal rahi hai interaction ho sakta hai — aur haan\nmedical store se direct steroid lena band karo dangerous hai — follow-up\n2 weeks.",
+    "translation": "Arjun's eczema worsening — mother giving homeopathy simultaneously AND applying unprescribed Clobetasol 0.05% (class 1 steroid!) on FACE — bought from medical store without prescription. NEVER use Class 1 steroid on child's face — risk of skin atrophy. Switch to Mometasone 0.1% — face 5 days max, body 10 days. Moisturizer QID (Cetaphil/Physiogel) — emollient first then steroid. Change bathing to lukewarm 5 minutes only. Tell mother: stop homeopathy while on allopathy (interaction risk) and stop buying steroids from store directly — it's dangerous. Follow-up 2 weeks.",
+    "expected_nodes": [
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Mother applying Class 1 steroid (Clobetasol) on child's face without prescription — DANGEROUS"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "NEVER Class 1 steroid on paediatric face — skin atrophy risk"
+      },
+      {
+        "type": "DECISION",
+        "content": "Switch to Mometasone 0.1% (face 5 days, body 10 days)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Moisturizer QID (Cetaphil/Physiogel) — emollient before steroid"
+      },
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Mother using homeopathy + allopathy simultaneously — interaction risk"
+      },
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Buying prescription steroids OTC from medical store"
+      }
+    ],
+    "why_fails": [
+      "Triple code-switch: Gujarati + Hindi + English in one sentence",
+      "\"jeni koi prescription nathi\" (no prescription for it) — Gujarati negation",
+      "Brand names: Clobetasol, Mometasone, Cetaphil, Physiogel — mixed with Gujarati",
+      "Social context (homeopathy use, OTC steroid purchase) — critical for patient education",
+      "\"emollient pehle fir steroid upar se\" — application ORDER matters clinically"
+    ]
+  },
+  {
+    "id": "VN-11",
+    "title": "NEPHROLOGY",
+    "languages": "Telugu-English",
+    "doctor": "Dr. Reddy, Hyderabad",
+    "context": "CKD patient with medication adjustment needed",
+    "transcript": "Lakshman gari creatinine 3.8 ki vachindi, GFR calculate chesthe 18 vachindi,\nCKD stage 4 ki progress ayyindi — Metformin ippatiki ippatiki aapeyandi\ncontraindicated below GFR 30 lo — Linagliptin ki shift cheyandi kidney safe\nadi — Ramipril dose 10 nunchi 5mg ki tagginchandi proteinuria thagguthundhaa\nani chuddham — potassium ekkuva unnadi 5.8 — Kayexalate ivvandi stat aur\ncalcium gluconate ready ga pettandi ECG changes unte — eppudu Torsemide\n20mg aapeyandi Furosemide 40mg ki maaripoyandi — aur haan nephrology OPD\nki next week rammani cheppandi dialysis planning discussion cheyali —\ndietician ki refer cheyandi low protein low potassium low sodium diet.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Lakshman — Creatinine 3.8, GFR 18, progressed to CKD Stage 4"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Stop Metformin — contraindicated below GFR 30"
+      },
+      {
+        "type": "DECISION",
+        "content": "Switch to Linagliptin (kidney safe)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Reduce Ramipril 10→5mg, monitor proteinuria"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Potassium 5.8 (high) — Kayexalate stat, Calcium gluconate ready for ECG changes"
+      },
+      {
+        "type": "DECISION",
+        "content": "Switch Torsemide 20→Furosemide 40, nephrology referral for dialysis planning"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-12",
+    "title": "ENT",
+    "languages": "Marathi-English",
+    "doctor": "Dr. Joshi, Pune",
+    "context": "After seeing a patient with sudden hearing loss — time-sensitive treatment",
+    "transcript": "Deshmukh sahab yeun gele, sudden sensorineural hearing loss ahe right side\nla — onset 2 divas aadhi, morning uthlyavar suddenly aikku yet navhta —\npure tone audiometry karun ghya urgently — ata Prednisolone 1mg per kg\nstart kara means 60mg morning 2 weeks tapering dose — intratympanic\nDexamethasone consider karun ya — MRI brain karun ghya acoustic neuroma\nrule out karayala — patient la sanga 48 hours madhye treatment start nahi\nkela tar recovery chances kammi hotat — Betahistine 16mg TDS suru kara\nvertigo asel tar — audiometry result baghun tya nusaar pudhe plan karu —\nsmoking band kara lau immediately circulation improve vhayala.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Deshmukh — sudden sensorineural hearing loss (right), onset 2 days ago"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Treatment must start within 48 hours or recovery chances decrease"
+      },
+      {
+        "type": "DECISION",
+        "content": "Prednisolone 60mg (1mg/kg) × 2 weeks taper, consider intratympanic Dexamethasone"
+      },
+      {
+        "type": "DECISION",
+        "content": "MRI brain to rule out acoustic neuroma"
+      },
+      {
+        "type": "DECISION",
+        "content": "Betahistine 16mg TDS if vertigo present"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Stop smoking immediately — improve circulation"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-13",
+    "title": "PULMONOLOGY",
+    "languages": "Hindi-English",
+    "doctor": "Dr. Ahuja, Lucknow",
+    "context": "COPD exacerbation with home oxygen misuse",
+    "transcript": "Tripathi ji ka COPD exacerbation hai — saturation 82% pe aaye the — problem\nye hai ki ghar pe oxygen concentrator chal raha hai lekin 8 litre pe rakh\nrakha hai — CO2 narcosis ka risk hai bhai sahab — 2 litre pe set karo target\n88 to 92 saturation rakhna hai zyada nahi — Nebulization karo Duolin plus\nBudecort, steroids do Methylprednisolone 40mg IV BD 5 din ke liye —\nantibiotics chahiye sputum purulent hai Amoxiclav 1.2g IV BD start karo —\nABG karo CO2 dekho agar 60 se zyada hai to BiPAP lagao — chest X-ray karo\nconsolidation hai ya nahi — Tripathi ji ko samjhao ki oxygen zyada dene se\nbrain ko signal jaata hai ki breathe mat karo — ye life threatening hai —\nfamily ko bhi samjhao ghar pe 2 litre se zyada nahi dena kabhi bhi.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "ANTI_PATTERN",
+        "content": "Patient using home O2 at 8L — CO2 narcosis risk (should be 2L, target SpO2 88-92%)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Nebulization (Duolin + Budecort), Methylprednisolone 40mg IV BD × 5 days"
+      },
+      {
+        "type": "DECISION",
+        "content": "Amoxiclav 1.2g IV BD (purulent sputum)"
+      },
+      {
+        "type": "DECISION",
+        "content": "ABG — if CO2 > 60 → BiPAP"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Home O2 NEVER > 2L — explain to patient AND family (life threatening)"
+      },
+      {
+        "type": "FACT",
+        "content": "SpO2 82% on arrival, COPD exacerbation"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-14",
+    "title": "ONCOLOGY",
+    "languages": "Tamil-English",
+    "doctor": "Dr. Suresh, Madurai",
+    "context": "Breaking bad news + treatment planning — emotionally heavy",
+    "transcript": "Biopsy result vanthuchu — Kamala paatti ku Stage 3 breast cancer confirm\naayiduchu — ennoda colleague Dr. Raman oncology la discuss panninom —\nneoadjuvant chemotherapy start pannanum TC regimen — Paclitaxel 175mg per\nm2 plus Carboplatin AUC 5 — 6 cycles 3 weeks interval — port placement\npannanum chemotherapy ku before — GCSF support venum nadir la neutropenia\nvarum — anti-emetic ondansetron plus dexamethasone pre-chemo — echocardiography\npannanum baseline cardiac function paarkka Paclitaxel cardiotoxicity risk iruku —\nKamala paatti kitta eppadi sollrathu — family meeting arrange pannunga —\ndaughter Meera doctor aa irukanga Chennai la — avaanga kitta munnadi pesum —\npsychological support referral pannunga — oru vishayam — Kamala paatti\ndiabetes iruku Metformin chal aagudhu — chemo time la sugar control romba\nimportant steroids sugar eththum.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Kamala — Stage 3 breast cancer confirmed (biopsy)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Neoadjuvant TC regimen: Paclitaxel 175mg/m² + Carboplatin AUC 5, 6 cycles q3w"
+      },
+      {
+        "type": "DECISION",
+        "content": "Port placement before chemo, GCSF for nadir neutropenia"
+      },
+      {
+        "type": "DECISION",
+        "content": "Pre-chemo antiemetics: Ondansetron + Dexamethasone"
+      },
+      {
+        "type": "DECISION",
+        "content": "Baseline echo (Paclitaxel cardiotoxicity risk)"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Diabetes management critical during chemo — steroids will raise sugar"
+      },
+      {
+        "type": "DECISION",
+        "content": "Family meeting — contact daughter Meera (doctor, Chennai) first, psych support referral"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-15",
+    "title": "GASTROENTEROLOGY",
+    "languages": "Telugu-English",
+    "doctor": "Dr. Naidu, Visakhapatnam",
+    "context": "Liver cirrhosis patient with ascites — complex management",
+    "transcript": "Subrahmanyam gari ki liver cirrhosis advance ayyindi — ascites perigu thunnadi\nalbumin 2.1 ki thaggindi — large volume paracentesis cheyali 5 litres drain\nchesthamu — prathi litre ki 8 grams albumin replace cheyali means 40 grams\nalbumin ivvali — Spironolactone 100mg start cheyandi Furosemide 40mg kuda —\nkaani potassium check cheyandi Spironolactone potassium peruguthundi — sodium\nrestrict cheyandi 2 grams per day — SBP prophylaxis kosam Norfloxacin 400mg\nOD start cheyandi ascitic fluid analysis send chesamu cell count albumin\nprotein culture — UGI endoscopy schedule cheyandi varices check kosam —\nLactulose 30ml TDS start cheyandi ammonia control kosam hepatic encephalopathy\nprevention ki — aur bhai Rifaximin 550 BD add cheyandi kuda — liver transplant\nevaluation ki referral raasinchandi Hyderabad KIMS ki — MELD score calculate\ncheyandi.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Subrahmanyam — advanced cirrhosis, ascites, albumin 2.1"
+      },
+      {
+        "type": "DECISION",
+        "content": "Large volume paracentesis (5L) with albumin replacement (8g/L = 40g total)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Spironolactone 100mg + Furosemide 40mg (diuretics), sodium restrict 2g/day"
+      },
+      {
+        "type": "DECISION",
+        "content": "SBP prophylaxis — Norfloxacin 400mg OD, ascitic fluid analysis sent"
+      },
+      {
+        "type": "DECISION",
+        "content": "UGI endoscopy for varices, Lactulose 30ml TDS + Rifaximin 550 BD (encephalopathy prevention)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Liver transplant evaluation referral to KIMS Hyderabad, calculate MELD score"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-16",
+    "title": "ORTHO POST-OP",
+    "languages": "Hindi-English",
+    "doctor": "Dr. Vikram (via Dr. Ananya dictating)",
+    "context": "Junior dictating post-op note on behalf of HOD — nervous, careful",
+    "transcript": "Dr. Vikram sir ke instruction ke hisaab se — Ramaiah uncle ka TKR hua hai\nright knee — Zimmer implant use hua hai size 5 — surgery time 1 hour 45\nminute — blood loss approximately 350ml — drain rakhna hai 48 hours —\nCPM machine day 2 se start — physiotherapy day 1 se — ankle pumps aur\nstatic quads — weight bearing walker ke saath day 2 se — pain management\nParacetamol 1g IV 6 hourly first 24 hours phir oral 650mg QDS — Tramadol\n50mg IV SOS agar VAS 6 se zyada — DVT prophylaxis Enoxaparin 40mg SC\nsubah se — 12 hours baad surgery ke — 14 din tak — antibiotics Cefuroxime\n1.5g IV BD 48 hours phir oral Cefuroxime 500 BD 5 din — Warfarin RESTART\nkarna hai but Dr. Mehta cardiology se discuss karke — khud se shuru mat\nkarna — INR monitoring start karna hai day 3 se.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Ramaiah — right TKR done, Zimmer size 5, 1hr 45min, blood loss 350ml"
+      },
+      {
+        "type": "DECISION",
+        "content": "Pain — Paracetamol 1g IV q6h (24hr) → oral 650mg QDS, Tramadol 50mg IV SOS if VAS > 6"
+      },
+      {
+        "type": "DECISION",
+        "content": "DVT — Enoxaparin 40mg SC daily from 12hr post-op × 14 days"
+      },
+      {
+        "type": "DECISION",
+        "content": "Antibiotics — Cefuroxime 1.5g IV BD (48hr) → oral 500mg BD (5 days)"
+      },
+      {
+        "type": "DECISION",
+        "content": "PT Day 1 (ankle pumps, static quads), CPM Day 2, weight-bearing walker Day 2"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Warfarin restart ONLY after Cardiology (Dr. Mehta) discussion — do NOT start independently"
+      },
+      {
+        "type": "DECISION",
+        "content": "Drain 48 hours, INR monitoring from Day 3"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-17",
+    "title": "ENDOCRINOLOGY",
+    "languages": "Malayalam-English",
+    "doctor": "Dr. Thomas, Trivandrum",
+    "context": "Thyroid management with pregnancy planning",
+    "transcript": "Nisha chechi thyroid case aanu — TSH 12.5 aanu hypothyroid confirm aanu —\nThyronorm 75mcg raavile kazhikkanam vayattil — 30 minutes kazhinjittu mathram\nbreakfast kazhikkuka — important vishayam — Nisha chechi pregnancy plan\ncheyunnundu 3 months kazhinju — TSH 2.5 il thaazhe kondu varanam pregnancy\nmunpu — 4 weeks il TSH repeat cheyyuka — dose increase vendum aayirikkum\n100mcg vareyum — calcium iron supplements Thyronorm inte koode kazhikkaan\npaadilla 4 hour gap venam — ippo Calcirol aanu kazhikkunnathu — athu\nvaikkunneram shift cheyyuka — folic acid 5mg daily start cheyyuka pregnancy\nplanning nu — OB-GYN Dr. Lekha yodu discuss cheyyuka timing about TSH\nstable aayaal mathrame conceive cheyyaavu.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Nisha — TSH 12.5, hypothyroid confirmed"
+      },
+      {
+        "type": "DECISION",
+        "content": "Thyronorm 75mcg morning empty stomach, 30 min before breakfast"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Calcium/iron supplements NOT with Thyronorm — 4 hour gap needed"
+      },
+      {
+        "type": "DECISION",
+        "content": "Shift Calcirol to evening (was morning — conflicts with Thyronorm)"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "TSH must be < 2.5 BEFORE conception — pregnancy planning in 3 months"
+      },
+      {
+        "type": "DECISION",
+        "content": "Repeat TSH in 4 weeks, may need dose increase to 100mcg"
+      },
+      {
+        "type": "DECISION",
+        "content": "Folic acid 5mg daily (pregnancy planning), discuss with OB-GYN Dr. Lekha"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-18",
+    "title": "GENERAL MEDICINE",
+    "languages": "Hyderabadi Telugu-Hindi-Urdu",
+    "doctor": "Dr. Imran, Hyderabad",
+    "context": "Classic Hyderabadi code-switching — three languages in one note",
+    "transcript": "Abbas bhai ka BP control mein nahi aa raha — dawai le raha hai regularly\nkehta hai lekin mujhe doubt hai — Telmisartan 40 chal raha tha ab 80 karo\n— aur Amlodipine 5mg add karo — ek kaam karo ABPM lagao 24 hour ambulatory\nmonitoring — white coat hypertension rule out karo — Abbas bhai thoda nervous\ntype ka aadmi hai clinic mein BP hamesha high aata hai ghar pe normal rehta\nhai bol raha hai — to ABPM se pata chal jayega — kidney function check karo\nmicroalbuminuria bhi dekho hypertensive nephropathy early detect karne ke liye —\nfundoscopy karwao hypertensive retinopathy grade karo — lipid profile karo\ncardiovascular risk assessment karo — agar ABPM mein bhi high aata hai to\ntriple therapy pe shift karna padega Telmisartan Amlodipine Chlorthalidone —\nlifestyle modification pe baat karo — namak kam khao exercise karo weight\nkam karo — Abbas bhai ko bolo dawai band mat karo BP normal aane pe bhi.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "DECISION",
+        "content": "Telmisartan 40→80mg, add Amlodipine 5mg"
+      },
+      {
+        "type": "DECISION",
+        "content": "24-hour ABPM to rule out white coat hypertension"
+      },
+      {
+        "type": "DECISION",
+        "content": "Renal workup — kidney function + microalbuminuria (hypertensive nephropathy screening)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Fundoscopy for hypertensive retinopathy grading, lipid profile for CV risk"
+      },
+      {
+        "type": "DECISION",
+        "content": "If ABPM confirms → triple therapy (Telmisartan + Amlodipine + Chlorthalidone)"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Do NOT stop medication even if BP normalizes (patient education)"
+      },
+      {
+        "type": "FACT",
+        "content": "Abbas — suspected white coat HTN (clinic BP high, home BP normal, nervous personality)"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-19",
+    "title": "ICU",
+    "languages": "Tamil-English",
+    "doctor": "Dr. Karthik, Salem",
+    "context": "Ventilator weaning trial — complex respiratory management",
+    "transcript": "Murugan patient ku ventilator la 5 days aayiduchu — ipo SBT try pannalaam —\nsettings reduce pannunga PS 5 PEEP 5 FiO2 30% — 30 minutes observe pannunga —\noru hour la RR 35 ku mela poguthu na abort pannidungo — SpO2 90 ku keezh\npoguthu na abort — HR 20% increase aana abort — paradoxical breathing iruntha\nabort — blood gas pannunga before and after SBT — pH 7.35 ku keezh pogathe\npaathukongo — SBT pass aana extubation plan pannalaam — extubation ku munnadi\ncuff leak test pannunga — steroids venam na Methylprednisolone 40mg IV\n4 hours before extubation — BiPAP ready vachikongo backup ku — reintubation\nkit bedside la ready ah irukkanam — dietician protein rich diet start\npannattum muscle wasting prevent panna — family meeting pannunga extubation\nplan explain pannunga risks discuss pannunga.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "DECISION",
+        "content": "SBT trial — PS 5, PEEP 5, FiO2 30%, observe 30-60 min"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Abort SBT if: RR > 35, SpO2 < 90%, HR increase > 20%, paradoxical breathing, pH < 7.35"
+      },
+      {
+        "type": "DECISION",
+        "content": "Pre-extubation — cuff leak test, Methylprednisolone 40mg IV 4hr before"
+      },
+      {
+        "type": "DECISION",
+        "content": "Post-extubation — BiPAP backup ready, reintubation kit bedside"
+      },
+      {
+        "type": "DECISION",
+        "content": "ABG before and after SBT"
+      },
+      {
+        "type": "DECISION",
+        "content": "Protein-rich diet to prevent muscle wasting, family meeting for extubation plan"
+      }
+    ],
+    "why_fails": []
+  },
+  {
+    "id": "VN-20",
+    "title": "RHEUMATOLOGY",
+    "languages": "Kannada-English",
+    "doctor": "Dr. Hegde, Mangalore",
+    "context": "Autoimmune patient with multiple comorbidities — polypharmacy review",
+    "transcript": "Savitri amma ge rheumatoid arthritis 15 varsha aayithu — ippo flare up\nbarthidhe joints swollen aagidhe — DAS28 score 5.8 high disease activity —\nMethotrexate 15mg weekly continue, folic acid 5mg next day — Hydroxychloroquine\n200mg BD continue — but Prednisolone 20mg aagidhe — taper maadbekku slowly\n2.5mg prathi 2 weeks ge reduce maadi — Methotrexate dose 20mg ge increase\nmaadona but aadre LFT check maadi moodlu — yen andre liver enzymes eri\nhog barodu — CBC kuda check maadi pancytopenia watch maadbekku — Savitri\namma ge diabetes kuda idhe Metformin 500 BD chal aagidhe — Prednisolone\nsugar eththuthhe adke sugar monitoring tight aagi maadbekku — bone density\nscan maadbekku long term steroids gi osteoporosis risk idhe — Calcium\nVitamin D start maadi iddre — aur vaccinations update maadi immunosuppression\nidhe — flu vaccine pneumococcal vaccine check maadi — COVID booster\naagidheya nodbekku.",
+    "translation": "",
+    "expected_nodes": [
+      {
+        "type": "FACT",
+        "content": "Savitri — RA 15 years, flare, DAS28 5.8 (high disease activity)"
+      },
+      {
+        "type": "DECISION",
+        "content": "Continue MTX 15mg weekly → may increase to 20mg (pending LFT), folic acid 5mg next day"
+      },
+      {
+        "type": "DECISION",
+        "content": "Taper Prednisolone 20mg → reduce 2.5mg every 2 weeks"
+      },
+      {
+        "type": "DECISION",
+        "content": "LFT + CBC before MTX dose increase (liver + pancytopenia monitoring)"
+      },
+      {
+        "type": "CONSTRAINT",
+        "content": "Prednisolone raises sugar — tighter glucose monitoring needed (has diabetes)"
+      },
+      {
+        "type": "DECISION",
+        "content": "DEXA scan (osteoporosis risk from steroids), start Calcium + Vitamin D"
+      },
+      {
+        "type": "DECISION",
+        "content": "Vaccination update — flu, pneumococcal, COVID booster (immunosuppressed)"
+      }
+    ],
+    "why_fails": []
+  }
+]
