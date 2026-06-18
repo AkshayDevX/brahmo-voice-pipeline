@@ -6,7 +6,7 @@ An ensembled, multilingual clinical voice capture and knowledge-extraction pipel
 
 ## 🚀 Key Features
 
-*   **Indic Code-Switched ASR Routing:** Automatically routes English inputs to **Whisper Large V3 (Groq)** and regional/code-mixed speech (Hindi, Telugu, etc.) to **Sarvam AI (Saaras:v3)**.
+*   **Indic Code-Switched ASR Routing:** Routes English inputs to **Whisper Large V3 (Groq)** and regional/code-mixed speech (Hindi, Telugu, etc.) to **Sarvam AI (Saaras:v3)** based on the selected language in the portal.
 *   **Built-in Romanized Transliteration:** Utilizes Sarvam's `mode=translit` to transcribe Indic speech directly into phonetic English letters, preventing script mismatches and yielding highly accurate Word Error Rate (WER) benchmarks.
 *   **Medical Intelligence Correction:** Pre-processes transcripts to fix drug brand names and tag regional critical negations (e.g., Telugu *"ivvaledu"*, Hindi *"mat do"*) before LLM inference.
 *   **Clinical Knowledge Extraction:** Uses **DeepSeek-V4-Flash** to classify extracted symptoms, conditions, and allergies into standard clinical nodes (`CONSTRAINT`, `DECISION`, `FACT`, `ANTI_PATTERN`).

@@ -51,7 +51,7 @@ I evaluated ASR providers across transcription accuracy (WER), code-switch handl
 ### Chosen Final Method: Brahmo ASR Router
 I implement a **Brahmo ASR Router** to route clinical voice notes cleanly:
 1. **Whisper Large V3 (via Groq LPU):** Default route for pure English notes due to ultra-low latency and high accuracy.
-2. **Sarvam AI (Saaras:v3 in `mode=translit`):** Routed automatically for Indic and multilingual code-mixed speech to obtain direct Romanized transcripts and preserve regional negations.
+2. **Sarvam AI (Saaras:v3 in `mode=translit`):** Routed for Indic and multilingual code-mixed speech based on the selected language hint to obtain direct Romanized transcripts and preserve regional negations.
 
 To optimize the clinician experience, I simplified the Playground ASR options to just two choices:
 * **Multilingual (Sarvam AI):** For any code-mixed or regional Indian language recordings.
