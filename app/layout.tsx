@@ -1,7 +1,9 @@
+import Footer from "@/components/footer";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Suspense } from "react";
 import DashboardNav from "../components/DashboardNav";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,12 +64,9 @@ export default function RootLayout({
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-zinc-905 py-8 text-center text-zinc-600 text-sm">
-          <p>
-            Brahmo Health Assessment &bull; 120B Medical LLM Extraction
-            Benchmark
-          </p>
-        </footer>
+        <Suspense>
+          <Footer />
+        </Suspense>
       </body>
     </html>
   );
