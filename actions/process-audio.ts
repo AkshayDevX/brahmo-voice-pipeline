@@ -15,10 +15,11 @@ export async function processAudioAction(formData: FormData) {
   const text = formData.get("text") as string | null;
   const languageHint = (formData.get("languageHint") as string) || "multi";
   const asrProvider = (formData.get("asrProvider") as string) || "router";
+  const ttsLanguage = (formData.get("ttsLanguage") as string) || "auto";
 
   if (text) {
     // 1. Synthesize text to speech
-    const audioBuffer = await synthesizeTextWithSarvam(text, languageHint);
+    const audioBuffer = await synthesizeTextWithSarvam(text, ttsLanguage);
 
     let transcript = "";
     let route = asrProvider;
