@@ -272,6 +272,108 @@ function LanguageSearchSelect({ value, onChange }: LanguageSearchSelectProps) {
   );
 }
 
+interface ModernSelectProps {
+  value: string;
+  onChange: (val: string) => void;
+  options: { value: string; label: string; sublabel?: string }[];
+  className?: string;
+  buttonClassName?: string;
+  dropdownClassName?: string;
+}
+
+function ModernSelect({
+  value,
+  onChange,
+  options,
+  className = "",
+  buttonClassName = "",
+  dropdownClassName = "",
+}: ModernSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const selectedOption = options.find((opt) => opt.value === value) || options[0];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={containerRef} className={`relative ${className}`}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center justify-between gap-2 bg-zinc-950/90 border border-zinc-800 text-zinc-350 rounded-xl px-3.5 py-2 text-xs font-bold hover:border-zinc-700 hover:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all cursor-pointer shadow-inner ${buttonClassName}`}
+      >
+        <span className="truncate">{selectedOption.label}</span>
+        <ChevronDown
+          className={`w-3.5 h-3.5 text-zinc-500 transition-transform duration-200 shrink-0 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {isOpen && (
+        <div className={`absolute left-0 mt-1.5 w-60 bg-zinc-950/95 border border-zinc-800 rounded-xl shadow-2xl z-50 backdrop-blur-xl p-1.5 flex flex-col gap-0.5 max-h-64 overflow-y-auto custom-scrollbar ${dropdownClassName}`}>
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => {
+                onChange(opt.value);
+                setIsOpen(false);
+              }}
+              className={`w-full flex flex-col px-3 py-2 rounded-lg text-left transition-all cursor-pointer ${
+                opt.value === value
+                  ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                  : "text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200 border border-transparent"
+              }`}
+            >
+              <span className="text-xs font-bold">{opt.label}</span>
+              {opt.sublabel && (
+                <span className="text-[9px] text-zinc-500 font-medium mt-0.5">
+                  {opt.sublabel}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const TTS_LANG_OPTIONS = [
+  { value: "auto", label: "Auto-detect (Native script)" },
+  { value: "en-IN", label: "English (Indian Accent)" },
+  { value: "hi-IN", label: "Hindi / Hinglish" },
+  { value: "ta-IN", label: "Tamil / Tanglish" },
+  { value: "te-IN", label: "Telugu" },
+  { value: "kn-IN", label: "Kannada" },
+  { value: "ml-IN", label: "Malayalam" },
+  { value: "mr-IN", label: "Marathi" },
+  { value: "gu-IN", label: "Gujarati" },
+  { value: "pa-IN", label: "Punjabi" },
+  { value: "od-IN", label: "Odia" },
+  { value: "bn-IN", label: "Bengali" },
+];
+
+const NODE_TYPE_OPTIONS = [
+  { value: "FACT", label: "Fact" },
+  { value: "DECISION", label: "Decision" },
+  { value: "CONSTRAINT", label: "Constraint" },
+  { value: "ANTI_PATTERN", label: "Anti-Pattern" },
+];
+
 export default function PipelinePlayground() {
   const [isPending, startTransition] = useTransition();
   const [results, setResults] = useState<any | null>(null);
@@ -294,6 +396,7 @@ export default function PipelinePlayground() {
   const [activeTab, setActiveTab] = useState<"audio" | "text">("audio");
   const [textInput, setTextInput] = useState("");
   const [language, setLanguage] = useState("multi");
+  const [ttsLanguage, setTtsLanguage] = useState("auto");
   const [asrProvider, _setAsrProvider] = useState("router");
 
   const handleStartRecording = async () => {
@@ -385,6 +488,7 @@ export default function PipelinePlayground() {
         formData.append("text", textInput);
         formData.append("languageHint", language);
         formData.append("asrProvider", asrProvider);
+        formData.append("ttsLanguage", ttsLanguage);
 
         const res = await processAudioAction(formData);
         if (res.success) {
@@ -551,21 +655,36 @@ export default function PipelinePlayground() {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-end gap-4 w-full">
+            <div className="flex flex-col gap-4 w-full animate-in fade-in-50 duration-200">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800/80 shadow-md">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs font-bold text-zinc-200">TTS Base Accent / Language</span>
+                  <span className="text-[10px] text-zinc-500">Crucial for pronouncing transliterated Hinglish or regional languages correctly</span>
+                </div>
+                <ModernSelect
+                  value={ttsLanguage}
+                  onChange={setTtsLanguage}
+                  options={TTS_LANG_OPTIONS}
+                  buttonClassName="min-w-[200px]"
+                  dropdownClassName="right-0 left-auto"
+                />
+              </div>
               <textarea
                 value={textInput}
                 onChange={(e) => setTextInput(e.target.value)}
                 placeholder="Type or paste the clinical notes text here (it will be synthesized to speech and run through ASR)..."
                 className="w-full h-36 bg-zinc-900/50 border border-zinc-700/80 text-zinc-100 rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all resize-none placeholder:text-zinc-600 text-sm leading-relaxed"
               />
-              <button
-                onClick={handleTextSubmit}
-                disabled={!textInput.trim()}
-                className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 disabled:opacity-50 text-white px-6 py-3 rounded-xl font-bold shadow-lg transition-all cursor-pointer border border-cyan-500/10"
-              >
-                <Play className="w-4 h-4 fill-white" />
-                Synthesize & Run ASR Router
-              </button>
+              <div className="flex justify-end">
+                <button
+                  onClick={handleTextSubmit}
+                  disabled={!textInput.trim()}
+                  className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 disabled:opacity-50 text-white px-6 py-3 rounded-xl font-bold shadow-lg transition-all cursor-pointer border border-cyan-500/10"
+                >
+                  <Play className="w-4 h-4 fill-white" />
+                  Synthesize & Run ASR Router
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -659,7 +778,7 @@ export default function PipelinePlayground() {
                   editableNodes.map((node, i) => (
                     <div
                       key={i}
-                      className={`bg-zinc-950/80 border rounded-xl p-4 transition-all flex flex-col gap-3.5 relative overflow-hidden group
+                      className={`bg-zinc-950/80 border rounded-xl p-4 transition-all flex flex-col gap-3.5 relative group shrink-0
                       ${
                         node.type === "CONSTRAINT"
                           ? "border-rose-500/20 border-l-4 border-l-rose-500 bg-rose-950/5"
@@ -671,27 +790,21 @@ export default function PipelinePlayground() {
                       }`}
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <select
+                        <ModernSelect
                           value={node.type || "FACT"}
-                          onChange={(e) =>
-                            handleUpdateNode(i, { type: e.target.value })
-                          }
-                          className={`text-xs font-bold px-2 py-1 rounded-lg uppercase tracking-wider bg-zinc-900/85 focus:outline-none focus:ring-1 focus:ring-cyan-500 border cursor-pointer
+                          onChange={(val) => handleUpdateNode(i, { type: val })}
+                          options={NODE_TYPE_OPTIONS}
+                          buttonClassName={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-lg border-l-2 bg-zinc-900/85
                             ${
                               node.type === "CONSTRAINT"
-                                ? "text-rose-400 border-rose-500/20"
+                                ? "text-rose-450 border-rose-500/20 border-l-rose-550"
                                 : node.type === "DECISION"
-                                  ? "text-amber-400 border-amber-500/20"
+                                  ? "text-amber-450 border-amber-500/20 border-l-amber-550"
                                   : node.type === "ANTI_PATTERN"
-                                    ? "text-orange-400 border-orange-500/20"
-                                    : "text-zinc-400 border-zinc-700"
+                                    ? "text-orange-450 border-orange-500/20 border-l-orange-550"
+                                    : "text-zinc-400 border-zinc-700 border-l-zinc-500"
                             }`}
-                        >
-                          <option value="FACT">Fact</option>
-                          <option value="DECISION">Decision</option>
-                          <option value="CONSTRAINT">Constraint</option>
-                          <option value="ANTI_PATTERN">Anti-Pattern</option>
-                        </select>
+                        />
 
                         <button
                           onClick={() => handleDeleteNode(i)}

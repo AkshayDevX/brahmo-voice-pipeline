@@ -1,0 +1,463 @@
+[
+  {
+    "term": "Paracetamol",
+    "mistranscriptions": [
+      "parasitamol",
+      "para see tamol",
+      "paris at a mall",
+      "para sita mole"
+    ]
+  },
+  {
+    "term": "Ibuprofen",
+    "mistranscriptions": [
+      "I be proven",
+      "ibu pro fan",
+      "I view profen",
+      "I proof in"
+    ]
+  },
+  {
+    "term": "Tramadol",
+    "mistranscriptions": [
+      "trauma doll",
+      "tram a doll",
+      "trauma dull",
+      "tramadole"
+    ]
+  },
+  {
+    "term": "Metformin",
+    "mistranscriptions": [
+      "met for men",
+      "metaphor min",
+      "met forming",
+      "metform in"
+    ]
+  },
+  {
+    "term": "Glimepiride",
+    "mistranscriptions": [
+      "glimpse ride",
+      "glib pride",
+      "glam a pride",
+      "glimmer ride"
+    ]
+  },
+  {
+    "term": "Warfarin",
+    "mistranscriptions": [
+      "war for in",
+      "warfare in",
+      "war faring",
+      "wore far in"
+    ]
+  },
+  {
+    "term": "Clopidogrel",
+    "mistranscriptions": [
+      "close pedigree",
+      "clopidol grill",
+      "club piddle grill"
+    ]
+  },
+  {
+    "term": "Enoxaparin",
+    "mistranscriptions": ["e nox a parr in", "enox a parent", "in ox a paring"]
+  },
+  {
+    "term": "Aspirin",
+    "mistranscriptions": ["aspiring", "a spring", "as per in", "aspren"]
+  },
+  {
+    "term": "Atorvastatin",
+    "mistranscriptions": [
+      "a tour of statin",
+      "at or vast a tin",
+      "at over statin"
+    ]
+  },
+  {
+    "term": "Omeprazole",
+    "mistranscriptions": ["oh my prays all", "home a prism", "omega prazoal"]
+  },
+  {
+    "term": "Pantoprazole",
+    "mistranscriptions": [
+      "pant oh pray soul",
+      "panther prays all",
+      "panto prism"
+    ]
+  },
+  {
+    "term": "Amoxicillin",
+    "mistranscriptions": ["a moxie see lin", "amoks see lin", "a mock silly in"]
+  },
+  {
+    "term": "Azithromycin",
+    "mistranscriptions": [
+      "a with row my sin",
+      "az throw my sin",
+      "a zither oh my sin"
+    ]
+  },
+  {
+    "term": "Telmisartan",
+    "mistranscriptions": ["tell me sartan", "tele me start on", "telma sartan"]
+  },
+  {
+    "term": "Amlodipine",
+    "mistranscriptions": ["am loading peen", "amlo di pine", "a melody pin"]
+  },
+  {
+    "term": "Metoprolol",
+    "mistranscriptions": ["metal oil", "met oh pro lol", "me toe pro loll"]
+  },
+  {
+    "term": "Ramipril",
+    "mistranscriptions": ["ram a pill", "ramp aril", "rami prill"]
+  },
+  {
+    "term": "Escitalopram",
+    "mistranscriptions": [
+      "escape tell a pram",
+      "es sit a low pram",
+      "es cital o pram"
+    ]
+  },
+  {
+    "term": "Levothyroxine",
+    "mistranscriptions": ["leave oh thy rocks in", "levo thigh roxanne"]
+  },
+  {
+    "term": "Methylprednisolone",
+    "mistranscriptions": ["methyl predator so lone", "metal prednisone"]
+  },
+  {
+    "term": "Prednisolone",
+    "mistranscriptions": [
+      "predator so lone",
+      "pred ni solo",
+      "prednisone alone"
+    ]
+  },
+  {
+    "term": "Furosemide",
+    "mistranscriptions": ["furious a maid", "few rows a mid", "furose might"]
+  },
+  {
+    "term": "Spironolactone",
+    "mistranscriptions": ["spiral lactone", "spy rono lack tone"]
+  },
+  {
+    "term": "Torsemide",
+    "mistranscriptions": ["tour semi day", "toss a mide", "torso might"]
+  },
+  {
+    "term": "Insulin Glargine",
+    "mistranscriptions": ["insult in glarjeen", "insulin glad gene"]
+  },
+  {
+    "term": "Insulin Aspart",
+    "mistranscriptions": ["insult in apart", "insulin as part"]
+  },
+  {
+    "term": "Clarithromycin",
+    "mistranscriptions": ["clarity row my sin", "cla rhythm ice in"]
+  },
+  {
+    "term": "Cefuroxime",
+    "mistranscriptions": ["safe you rocks him", "sef euro extreme"]
+  },
+  {
+    "term": "Apixaban",
+    "mistranscriptions": ["a picks a ban", "apex a ban", "a pixel ban"]
+  },
+  {
+    "term": "Linagliptin",
+    "mistranscriptions": ["linear glip tin", "lina grip tin"]
+  },
+  {
+    "term": "Labetalol",
+    "mistranscriptions": ["label all", "la better lol", "label a lol"]
+  },
+  {
+    "term": "Hydroxychloroquine",
+    "mistranscriptions": ["hydroxy chloroquine", "hydroxy claw queen"]
+  },
+  {
+    "term": "Methotrexate",
+    "mistranscriptions": ["metro tracks eight", "method tracks ate"]
+  },
+  {
+    "term": "Gabapentin",
+    "mistranscriptions": ["grab a pen tin", "gab upon tin"]
+  },
+  {
+    "term": "QDS",
+    "mistranscriptions": ["cue d s", "kudos", "cuties"]
+  },
+  {
+    "term": "TDS",
+    "mistranscriptions": ["t d s", "tedious", "teddies"]
+  },
+  {
+    "term": "BD",
+    "mistranscriptions": ["be de", "beady", "buddy"]
+  },
+  {
+    "term": "OD",
+    "mistranscriptions": ["oh dee", "ode", "oddy"]
+  },
+  {
+    "term": "PRN",
+    "mistranscriptions": ["pee are en", "pirn", "preen"]
+  },
+  {
+    "term": "SOS",
+    "mistranscriptions": ["sos", "sauce"]
+  },
+  {
+    "term": "STAT",
+    "mistranscriptions": ["state"]
+  },
+  {
+    "term": "Heparin",
+    "mistranscriptions": ["heparin", "hep rin", "hep-rin"]
+  },
+  {
+    "term": "Morphine",
+    "mistranscriptions": ["morphine", "more fin", "morfin"]
+  },
+  {
+    "term": "Diclofenac",
+    "mistranscriptions": ["diclofenac", "diclo", "declofenac"]
+  },
+  {
+    "term": "HS",
+    "mistranscriptions": ["aitch es", "hes", "his"]
+  },
+  {
+    "term": "Troponin",
+    "mistranscriptions": [
+      "trope on in",
+      "tropo nine",
+      "tropical nin",
+      "trophy nin"
+    ]
+  },
+  {
+    "term": "Creatinine",
+    "mistranscriptions": ["creative nine", "create a nine", "cree atinine"]
+  },
+  {
+    "term": "HbA1c",
+    "mistranscriptions": ["hba one see", "hab a one see", "h b a 1 c"]
+  },
+  {
+    "term": "PT-INR",
+    "mistranscriptions": ["pt inner", "pity inner", "petty in r"]
+  },
+  {
+    "term": "Clonazepam",
+    "mistranscriptions": [
+      "clonaza pam",
+      "clonaza-pam",
+      "clonozopam",
+      "clonazapam",
+      "clonazepam"
+    ]
+  },
+  {
+    "term": "Methyldopa",
+    "mistranscriptions": ["methyl dopa", "methyl-dopa", "methyldopam"]
+  },
+  {
+    "term": "Tranexamic acid",
+    "mistranscriptions": [
+      "tranexamic acid",
+      "pranixamic acid",
+      "pranixamic",
+      "tranicamic acid",
+      "tranicamic",
+      "trane-xamic acid",
+      "tranexamic"
+    ]
+  },
+  {
+    "term": "Clobetasol",
+    "mistranscriptions": [
+      "clobeta soul",
+      "clobetasol",
+      "clobeta-sol",
+      "clobetol"
+    ]
+  },
+  {
+    "term": "Mometasone",
+    "mistranscriptions": [
+      "mumi sone",
+      "mometson",
+      "momit zone",
+      "momitasone",
+      "mometasone",
+      "mometazone"
+    ]
+  },
+  {
+    "term": "Cetaphil",
+    "mistranscriptions": [
+      "set filia",
+      "set fill",
+      "set philia",
+      "cetaphil",
+      "setaphil"
+    ]
+  },
+  {
+    "term": "Physiogel",
+    "mistranscriptions": ["physio gel", "physiogel", "physio-gel"]
+  },
+  {
+    "term": "Dexamethasone",
+    "mistranscriptions": [
+      "dexmedicine",
+      "dexmethoxone",
+      "dexmethasone",
+      "dexa methasone",
+      "dexamethazone",
+      "dexamet"
+    ]
+  },
+  {
+    "term": "Betahistine",
+    "mistranscriptions": [
+      "beta histains",
+      "beta histene",
+      "beta-histine",
+      "betahistin"
+    ]
+  },
+  {
+    "term": "Duolin",
+    "mistranscriptions": ["dolin", "doolin", "2-lim", "two-lim", "duolin"]
+  },
+  {
+    "term": "Budecort",
+    "mistranscriptions": ["budecord", "bude coat", "bude-coat", "budecort"]
+  },
+  {
+    "term": "Amoxiclav",
+    "mistranscriptions": ["amoxy clav", "amoxie clav", "amoxyclav", "amoxiclav"]
+  },
+  {
+    "term": "Paclitaxel",
+    "mistranscriptions": [
+      "pectatexel",
+      "puclitexel",
+      "paclitexil",
+      "aclitexil",
+      "aklitexil",
+      "paclitaxol"
+    ]
+  },
+  {
+    "term": "Carboplatin",
+    "mistranscriptions": ["carboplat", "carboplate", "carboplatin"]
+  },
+  {
+    "term": "Ondansetron",
+    "mistranscriptions": [
+      "ondansetron",
+      "ondansetran",
+      "ondancetron",
+      "ondanset"
+    ]
+  },
+  {
+    "term": "Norfloxacin",
+    "mistranscriptions": ["norfloxin", "nerfloxin", "norflox", "norfloxacine"]
+  },
+  {
+    "term": "Lactulose",
+    "mistranscriptions": [
+      "lactuloz",
+      "loose lacto",
+      "lactolos",
+      "lectos",
+      "loose lactose"
+    ]
+  },
+  {
+    "term": "Rifaximin",
+    "mistranscriptions": [
+      "rifexamine",
+      "refaximin",
+      "refleximin",
+      "rifaximin",
+      "rifaxime"
+    ]
+  },
+  {
+    "term": "Calcirol",
+    "mistranscriptions": ["calcerol", "calcirol", "calciral", "calci-rol"]
+  },
+  {
+    "term": "Chlorthalidone",
+    "mistranscriptions": [
+      "clorithalidone",
+      "chlorthalidon",
+      "chlor-thalidone",
+      "clorithalidone"
+    ]
+  },
+  {
+    "term": "GCS",
+    "mistranscriptions": ["g c s", "gcs"]
+  },
+  {
+    "term": "MI",
+    "mistranscriptions": ["m i", "mi"]
+  },
+  {
+    "term": "STEMI",
+    "mistranscriptions": ["stemi", "s t e m i", "steamy", "stemy"]
+  },
+  {
+    "term": "BiPAP",
+    "mistranscriptions": [
+      "be pap",
+      "2b pep",
+      "2b pap",
+      "2b-pap",
+      "by pap",
+      "by-pap",
+      "bipap",
+      "2b-pep"
+    ]
+  },
+  {
+    "term": "ABG",
+    "mistranscriptions": ["a b g", "abg"]
+  },
+  {
+    "term": "CBC",
+    "mistranscriptions": ["c b c", "cbc"]
+  },
+  {
+    "term": "LFT",
+    "mistranscriptions": ["l f t", "lft"]
+  },
+  {
+    "term": "RFT",
+    "mistranscriptions": ["r f t", "rft"]
+  },
+  {
+    "term": "DVT",
+    "mistranscriptions": ["d v t", "dvt"]
+  },
+  {
+    "term": "TKR",
+    "mistranscriptions": ["t k r", "tkr", "tiker", "ticket R", "take care"]
+  }
+]

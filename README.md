@@ -6,7 +6,7 @@ An ensembled, multilingual clinical voice capture and knowledge-extraction pipel
 
 ## 🚀 Key Features
 
-*   **Indic Code-Switched ASR Routing:** Automatically routes English inputs to **Whisper Large V3 (Groq)** and regional/code-mixed speech (Hindi, Telugu, etc.) to **Sarvam AI (Saaras:v3)**.
+*   **Indic Code-Switched ASR Routing:** Routes English inputs to **Whisper Large V3 (Groq)** and regional/code-mixed speech (Hindi, Telugu, etc.) to **Sarvam AI (Saaras:v3)** based on the selected language in the portal.
 *   **Built-in Romanized Transliteration:** Utilizes Sarvam's `mode=translit` to transcribe Indic speech directly into phonetic English letters, preventing script mismatches and yielding highly accurate Word Error Rate (WER) benchmarks.
 *   **Medical Intelligence Correction:** Pre-processes transcripts to fix drug brand names and tag regional critical negations (e.g., Telugu *"ivvaledu"*, Hindi *"mat do"*) before LLM inference.
 *   **Clinical Knowledge Extraction:** Uses **DeepSeek-V4-Flash** to classify extracted symptoms, conditions, and allergies into standard clinical nodes (`CONSTRAINT`, `DECISION`, `FACT`, `ANTI_PATTERN`).
@@ -32,11 +32,14 @@ graph TD
 
 ## 📂 Assessment Documentation Directory
 
-We have prepared comprehensive documentation files detailing the evaluation metrics, architecture selections, cost breakdowns, and implementation details:
+I have prepared comprehensive documentation files detailing the evaluation metrics, architecture selections, cost breakdowns, and implementation details:
 
-*   📖 **[ASR Evaluation & Benchmarking Report](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/ASR_EVALUATION_REPORT.md)**: Side-by-side comparison of evaluated ASR models (Whisper, Sarvam, Deepgram, ShunyaLabs), metrics (WER, MTA, Negation Preservation), and rejection rationales.
-*   📖 **[Architecture & Cost Analysis Report](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/ARCHITECTURE_AND_COST.md)**: Brahmo ASR Router strategy, base infrastructure costs, and scaling projections (Pilot, Moderate, Scale).
-*   📖 **[Technical Walkthrough & Verification](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/WALKTHROUGH.md)**: Deep dive into chunking logic, negation handling, database mappings, and interactive review workflows.
+*   📖 **[ASR Evaluation & Benchmarking Report](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/ASR_EVALUATION_REPORT.md)**: Side-by-side comparison of evaluated ASR models (Whisper, Sarvam, Deepgram, ShunyaLabs), metrics (WER, MTA, Negation Preservation), and rejection rationales.
+*   📖 **[Architecture & Cost Analysis Report](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/ARCHITECTURE_AND_COST.md)**: Brahmo ASR Router strategy, base infrastructure costs, and scaling projections (Pilot, Moderate, Scale).
+*   📖 **[Technical Walkthrough & Verification](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/WALKTHROUGH.md)**: Deep dive into chunking logic, negation handling, database mappings, and interactive review workflows.
+*   📖 **[Pipeline Data Sources & Lexicons](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/data_source.md)**: Overview of ASR test data, phonetic medical dictionaries, Indic negations, name databases, and regional number conversions.
+*   📖 **[Clinical Pipeline & Benchmark Corrections](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/PIPELINE_CORRECTIONS.md)**: Detailed changelog of medical intelligence corrections, ASR code-switch parameters, regional numbers unit contexts, and safety negation scopes.
+
 
 ## 📡 Indic Conformer Microservice
 

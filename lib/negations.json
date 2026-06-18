@@ -1,0 +1,38 @@
+{
+  "te": [
+    "ivvaledu",
+    "ivvakudadu",
+    "kudadu",
+    "ledu",
+    "vaddhu",
+    "cheyakandi",
+    "aapandi",
+    "cheyakudadu"
+  ],
+  "hi": [
+    "mat do",
+    "nahi",
+    "band karo",
+    "mat karo",
+    "na dena",
+    "nahi dena",
+    "mat dena",
+    "rok do",
+    "hatao",
+    "bilkul nahi"
+  ],
+  "ta": [
+    "kudadhu",
+    "venda",
+    "illai",
+    "kudaadhu",
+    "pannakudadhu",
+    "kodukka kudadhu",
+    "vaenda"
+  ],
+  "kn": ["baralla", "kudadu", "beda", "kodabaradu", "maadabaradu", "nillisi"],
+  "ml": ["paadilla", "aruthhu", "venda", "kodukkaruthhu", "cheyyaruthhu"],
+  "mr": ["deu naka", "nahi", "nako", "band kara", "thambav", "deu naye"],
+  "bn": ["deben na", "korben na", "bandho korun", "na", "deoaa uchhit noy"],
+  "gu": ["aapvo nahi", "nathi", "band karo", "nakko", "na aapo"]
+}

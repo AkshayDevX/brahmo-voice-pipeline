@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { and, eq } from "drizzle-orm";
-import { updateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { db } from "../drizzle/index";
 import {
   accuracyResults,
@@ -517,6 +517,7 @@ export async function runBenchmark(noteId: string, asrProvider: string) {
       await db.insert(accuracyResults).values(dataPayload as any);
     }
     updateTag("accuracy-results");
+    revalidatePath("/benchmark");
   } catch (e) {
     console.error("DB Upsert failed:", e);
   }

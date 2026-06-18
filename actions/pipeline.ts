@@ -1,7 +1,7 @@
 "use server";
 
 import { desc, eq } from "drizzle-orm";
-import { updateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { db } from "../drizzle/index"; // Assuming standard setup
 import { knowledgeNodes, transcripts } from "../drizzle/schema";
 import {
@@ -135,6 +135,7 @@ export async function confirmDoctorReviewAction(
     }
 
     updateTag("ehr-records");
+    revalidatePath("/ehr");
     return { success: true };
   } catch (e: any) {
     console.error("Error in confirmDoctorReviewAction:", e);

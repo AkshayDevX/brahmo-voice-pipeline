@@ -374,6 +374,9 @@ export async function synthesizeTextWithSarvam(
 
   if (languageHint === "en") {
     targetLangCode = "en-IN";
+  } else if (languageHint !== "multi" && languageHint !== "auto") {
+    // If languageHint is an explicit BCP-47 language code, use it directly
+    targetLangCode = languageHint;
   } else {
     // Check unicode ranges in text to find the script and map to language code
     if (/[\u0900-\u097F]/.test(text)) {
@@ -409,7 +412,7 @@ export async function synthesizeTextWithSarvam(
     },
     body: JSON.stringify({
       text: text,
-      speaker: "meera", // Standard clear female voice
+      speaker: "shreya", // Standard clear female voice
       target_language_code: targetLangCode,
       model: "bulbul:v3",
     }),
@@ -421,9 +424,9 @@ export async function synthesizeTextWithSarvam(
   }
 
   const data = await response.json();
-  if (!data.audio) {
+  if (!data.audios || data.audios.length === 0) {
     throw new Error("No audio returned from Sarvam TTS");
   }
 
-  return Buffer.from(data.audio, "base64");
+  return Buffer.from(data.audios[0], "base64");
 }
