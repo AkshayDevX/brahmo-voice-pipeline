@@ -32,11 +32,14 @@ graph TD
 
 ## 📂 Assessment Documentation Directory
 
-We have prepared comprehensive documentation files detailing the evaluation metrics, architecture selections, cost breakdowns, and implementation details:
+I have prepared comprehensive documentation files detailing the evaluation metrics, architecture selections, cost breakdowns, and implementation details:
 
-*   📖 **[ASR Evaluation & Benchmarking Report](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/ASR_EVALUATION_REPORT.md)**: Side-by-side comparison of evaluated ASR models (Whisper, Sarvam, Deepgram, ShunyaLabs), metrics (WER, MTA, Negation Preservation), and rejection rationales.
-*   📖 **[Architecture & Cost Analysis Report](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/ARCHITECTURE_AND_COST.md)**: Brahmo ASR Router strategy, base infrastructure costs, and scaling projections (Pilot, Moderate, Scale).
-*   📖 **[Technical Walkthrough & Verification](file:///c:/Users/aksha/OneDrive/Desktop/My%20Projects/assessments/Astroum/brahmo-voice-pipeline/docs/WALKTHROUGH.md)**: Deep dive into chunking logic, negation handling, database mappings, and interactive review workflows.
+*   📖 **[ASR Evaluation & Benchmarking Report](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/ASR_EVALUATION_REPORT.md)**: Side-by-side comparison of evaluated ASR models (Whisper, Sarvam, Deepgram, ShunyaLabs), metrics (WER, MTA, Negation Preservation), and rejection rationales.
+*   📖 **[Architecture & Cost Analysis Report](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/ARCHITECTURE_AND_COST.md)**: Brahmo ASR Router strategy, base infrastructure costs, and scaling projections (Pilot, Moderate, Scale).
+*   📖 **[Technical Walkthrough & Verification](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/WALKTHROUGH.md)**: Deep dive into chunking logic, negation handling, database mappings, and interactive review workflows.
+*   📖 **[Pipeline Data Sources & Lexicons](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/data_source.md)**: Overview of ASR test data, phonetic medical dictionaries, Indic negations, name databases, and regional number conversions.
+*   📖 **[Clinical Pipeline & Benchmark Corrections](https://github.com/AkshayDevX/brahmo-voice-pipeline/tree/main/docs/PIPELINE_CORRECTIONS.md)**: Detailed changelog of medical intelligence corrections, ASR code-switch parameters, regional numbers unit contexts, and safety negation scopes.
+
 
 ## 📡 Indic Conformer Microservice
 

@@ -6,7 +6,7 @@ This document details the final architecture selection rationale for the Brahmo 
 
 ## 1. Final Architecture Selection
 
-Our architecture uses the **Brahmo ASR Router** to route clinical voice notes cleanly:
+My architecture uses the **Brahmo ASR Router** to route clinical voice notes cleanly:
 
 ```mermaid
 graph TD
@@ -20,7 +20,7 @@ graph TD
 ```
 
 ### Rationale:
-1. **ASR Script Matching:** Whisper and other standard models transcribe code-mixed regional speech in native scripts (Devanagari, Telugu letters). Since our reference transcripts are Romanized (English letters), native script yields a 100% Levenshtein Word Error Rate (WER). **Sarvam AI (`saaras:v3` with `mode=translit`)** transcribes directly into Romanized English script, enabling accurate WER benchmarks and preservation of regional negations.
+1. **ASR Script Matching:** Whisper and other standard models transcribe code-mixed regional speech in native scripts (Devanagari, Telugu letters). Since my reference transcripts are Romanized (English letters), native script yields a 100% Levenshtein Word Error Rate (WER). **Sarvam AI (`saaras:v3` with `mode=translit`)** transcribes directly into Romanized English script, enabling accurate WER benchmarks and preservation of regional negations.
 2. **Clinical Intent Protection:** Whisper is kept for pure English notes where it excels.
 3. **Rejection of Self-Hosted Models:** Self-hosted open-source Indic-Conformer models failed in key areas, repeatedly dropping English medical terms and failing to transcribe code-mixed speech accurately. Therefore, they were completely rejected from the architecture.
 
@@ -28,7 +28,7 @@ graph TD
 
 ## 2. Cost Analysis & Projections
 
-We present the operational cost projections for our API-based **Brahmo ASR Router** (ASR via Groq/Sarvam + LLM via DeepSeek).
+I present the operational cost projections for my API-based **Brahmo ASR Router** (ASR via Groq/Sarvam + LLM via DeepSeek).
 
 ### Scenario Parameters:
 * **Audio Length:** 30 seconds average per note.
@@ -81,5 +81,5 @@ We present the operational cost projections for our API-based **Brahmo ASR Route
 
 ## 3. Financial Verdict
 
-1. **Brahmo ASR Router is Highly Cost-Effective:** Even at the 50-hospital scale, our pay-as-you-go routing strategy costs just **\$1,871.13 / month** to transcribe and extract clinical knowledge nodes from 750,000 patient encounters.
-2. **Pay-as-you-go Advantage:** By utilizing pay-as-you-go cloud APIs (Groq Whisper, Sarvam AI, DeepSeek), we avoid the high upfront and maintenance costs of self-hosted GPU infrastructure (which starts at \$800+/month even for a small pilot).
+1. **Brahmo ASR Router is Highly Cost-Effective:** Even at the 50-hospital scale, my pay-as-you-go routing strategy costs just **\$1,871.13 / month** to transcribe and extract clinical knowledge nodes from 750,000 patient encounters.
+2. **Pay-as-you-go Advantage:** By utilizing pay-as-you-go cloud APIs (Groq Whisper, Sarvam AI, DeepSeek), I avoid the high upfront and maintenance costs of self-hosted GPU infrastructure (which starts at \$800+/month even for a small pilot).
